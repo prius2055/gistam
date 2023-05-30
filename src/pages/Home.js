@@ -1,14 +1,10 @@
-import { useSelector } from 'react-redux';
-import Post from './Post';
+import PostList from '../components/PostList';
 
 export default function Home() {
-  const { posts } = useSelector((store) => store.post);
-  console.log(posts);
+  console.log('home');
   return (
     <div className="home">
-      {posts.map((post) => (
-        <Post key={post.id} postItem={post} />
-      ))}
+      <PostList />
     </div>
   );
 }
