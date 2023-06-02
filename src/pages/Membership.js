@@ -6,15 +6,11 @@ import PostList from '../components/PostList';
 import './Membership.css';
 
 const userDirectory = {
-  id: '',
   fullname: '',
-  username: '',
-  email: '',
+  Email: '',
   password: '',
-  topic: '',
-  intro: '',
-  content: '',
-  date: '',
+  registrationDate: '',
+  memberImage: '',
   loggedIn: false,
 };
 

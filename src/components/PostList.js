@@ -3,9 +3,11 @@ import { useSelector } from 'react-redux';
 
 const PostList = () => {
   const { posts } = useSelector((store) => store.post);
-  return posts.map(
-    (post) => post.intro && <Post key={post.id} postItem={post} />
-  );
+  console.log(posts)
+  console.log('postlist')
+
+  const filteredPosts = posts.filter((post) => post.posts.length !== 0);
+  return filteredPosts.map((post) => <Post key={post.id} postItem={post} />);
 };
 
 export default PostList;

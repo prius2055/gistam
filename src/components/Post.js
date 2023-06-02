@@ -7,8 +7,12 @@ const Post = ({ postItem }) => {
   return (
     <div className="post">
       <NavLink to="/post">
-        <h2>{postItem.topic}</h2>
-        <p>{postItem.intro}</p>
+        {postItem.posts.map((post) => (
+          <div key={post.postId}>
+            <h2>{post.topic}</h2>
+            <p>{post.intro}</p>
+          </div>
+        ))}
         <p>{postItem.fullname}</p>
         {/* <p>{postItem.date}</p> */}
       </NavLink>
