@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PostList from '../components/PostList';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { auth } from '../firebase/firebaseConfig';
+// import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+// import { auth } from '../firebase/firebaseConfig';
 
 import './SignIn.css';
 
