@@ -1,49 +1,26 @@
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faBell } from '@fortawesome/free-regular-svg-icons';
 
 import './Header.css';
 
-export default function Header() {
-  const { posts } = useSelector((state) => state.post);
-
-  const loggedInUser = posts.filter((post) => post.loggedIn);
-
+const Header = () => {
+  console.log('header');
   return (
     <div className="header">
-      <NavLink to="/">Chatter</NavLink>
-
-      <div>
-        {loggedInUser.length !== 0 &&
-          loggedInUser.map((user) => (
-            <nav className="navigation">
-              <ul className="navbar">
-                <li>
-                  Welcome, <span>{user.fullname}</span>
-                </li>
-                <li>
-                  <NavLink to="/newpost">Write a post</NavLink>
-                </li>
-              </ul>
-              <button type="button">Sign out</button>
-            </nav>
-          ))}
-
-        {loggedInUser.length === 0 && (
-          <nav className="navigation">
-            <ul className="navbar">
-              <li>
-                <NavLink to="/">About Chatter</NavLink>
-              </li>
-              <li>
-                <NavLink to="/member">Become a member</NavLink>
-              </li>
-            </ul>
-            <button type="button">
-              <NavLink to="/sign">Sign in</NavLink>
-            </button>
-          </nav>
-        )}
+      <div className="search">
+        <FontAwesomeIcon
+          icon={faMagnifyingGlass}
+          className="header-icons"
+        />
+        <input type="search" placeholder="search chatter" />
+      </div>
+      <div className="profile">
+        <FontAwesomeIcon icon={faBell} className="header-icons" />
+        <img />
       </div>
     </div>
   );
-}
+};
+
+export default Header;
