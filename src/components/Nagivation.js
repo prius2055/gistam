@@ -44,14 +44,13 @@ export default function Nagivation() {
           <nav className="navigation">
             <div className="navbar">
               <div>
-                {/* <NavLink to="/">About Chatter</NavLink> */}
-                <NavLink to="/">
-                  <h3>Overview</h3>
-                </NavLink>
+                <h3>Overview</h3>
                 <ul>
                   <li className="list-group">
                     <img src={feedImage} alt="feed" />
-                    <li>Feed</li>
+                    <li>
+                      <NavLink to="/feeds">Feed</NavLink>
+                    </li>
                   </li>
                   <li className="list-group">
                     <FontAwesomeIcon icon={faBookmark} />
@@ -74,7 +73,7 @@ export default function Nagivation() {
 
               <div>
                 {/* <NavLink to="/member">Become a member</NavLink> */}
-                <NavLink to="/member" className='trending'>
+                <NavLink to="/member" className="trending">
                   <h3>Trending Tags</h3>
                   <FontAwesomeIcon icon={faArrowTrendUp} />
                 </NavLink>
@@ -89,10 +88,7 @@ export default function Nagivation() {
                 </ul>
               </div>
               <div>
-                {/* <NavLink to="/">About Chatter</NavLink> */}
-                <NavLink to="/">
-                  <h3> Personal</h3>
-                </NavLink>
+                <h3> Personal</h3>
                 <ul>
                   <li className="list-group">
                     <FontAwesomeIcon icon={faUser} />
