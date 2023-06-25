@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import mainArray from '../data/mainArray';
+
 // import usersArray from '../data/usersArray';
+
 
 // const initialState = {
 //   posts: postArrays,
@@ -9,6 +11,8 @@ import mainArray from '../data/mainArray';
 //     : [],
 //   userIsLoggedIn: false,
 // };
+
+
 
 const initialState = {
   posts: mainArray,
@@ -20,11 +24,12 @@ const postSlice = createSlice({
   reducers: {
     addNewUser: (state, { payload }) => {
       const newMember = {
-        fullname: payload.fullname,
-        Email: payload.Email,
+        fullname: payload.firstname + payload.lastname,
+        userName: payload.userName,
+        Email: payload.email,
         password: payload.password,
         registrationDate: '',
-        memberImage: '',
+        image: payload.image,
         posts: [],
         loggedIn: true,
       };

@@ -10,6 +10,7 @@ import {
 import { faUserGroup, faArrowTrendUp } from '@fortawesome/free-solid-svg-icons';
 import feedImage from '../img/feed.png';
 import chartImage from '../img/chart.png';
+import Header from './Header';
 
 import './Navigation.css';
 
@@ -20,12 +21,11 @@ export default function Nagivation() {
 
   return (
     <div className="navigation-container">
-      <NavLink to="/" className="logo">
-        CHATTER
-      </NavLink>
-
       <div className="navigation-group">
-        {loggedInUser.length !== 0 &&
+        <NavLink to="/" className="logo">
+          CHATTER
+        </NavLink>
+        {/* {loggedInUser.length === 0 &&
           loggedInUser.map((user) => (
             <nav className="navigation">
               <ul className="navbar">
@@ -38,7 +38,7 @@ export default function Nagivation() {
               </ul>
               <button type="button">Sign out</button>
             </nav>
-          ))}
+          ))} */}
 
         {loggedInUser.length === 0 && (
           <nav className="navigation">
@@ -110,6 +110,7 @@ export default function Nagivation() {
           </nav>
         )}
       </div>
+      <Header />
     </div>
   );
 }

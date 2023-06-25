@@ -1,0 +1,148 @@
+.overlay {
+  background-color: rgba(0, 0, 0, 0.8);
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.error-message {
+  color: red;
+  width: 30rem;
+  background-color: white;
+  position: absolute;
+  top: 1.5rem;
+  left: 37%;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  font-weight: 500;
+}
+
+.error-message p {
+  text-align: center;
+  text-decoration: underline;
+}
+
+.sign-in {
+  display: flex;
+  width: 60rem;
+  height: 45rem;
+  position: absolute;
+  top: 12rem;
+  left: 30rem;
+  z-index: 10;
+  background-color: white;
+}
+
+.sign-in-hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url(../img/sign-in-hero.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 45%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  padding: 30% 1rem;
+  color: white;
+}
+
+.sign-in-hero .chatter {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.sign-in-form {
+  padding: 1rem 3rem 1rem 5rem;
+  border: 1px #ccc solid;
+}
+
+.sign-in-form-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.sign-in-form-nav h4 {
+  width: 50%;
+  /* text-align: right; */
+}
+
+.sign-in-form-nav h4:last-child {
+  text-align: right;
+}
+
+.blue-border {
+  border-bottom: 5px #543ee0 solid;
+  padding-bottom: 0.5rem;
+}
+
+.grey-border {
+  border-bottom: 5px #ccc solid;
+  padding-bottom: 0.5rem;
+}
+
+.sign-in-form-nav h4 {
+  cursor: pointer;
+}
+
+.sign-in-form-area {
+  border: none;
+  margin-top: 1.2rem;
+  width: 25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.name-field {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.name-field input {
+  margin-right: 12rem;
+  width: 90%;
+}
+
+.sign-in-form-area label {
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+}
+
+.sign-in-form-area select {
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  box-shadow: 0px 2px 2px rgba(33, 37, 41, 0.06),
+    0px 0px 1px rgba(33, 37, 41, 0.08);
+  border-radius: 8px;
+}
+
+.sign-in-form-area input {
+  padding: 0.5rem;
+  margin-left: 0;
+  border: 1px solid #ced4da;
+  box-shadow: 0px 2px 2px rgba(33, 37, 41, 0.06),
+    0px 0px 1px rgba(33, 37, 41, 0.08);
+  border-radius: 8px;
+}
+
+.sign-in-form-area button {
+  padding: 0.8rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #ced4da;
+  box-shadow: 0px 2px 2px rgba(33, 37, 41, 0.06),
+    0px 0px 1px rgba(33, 37, 41, 0.08);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.account-btn {
+  background: #543ee0;
+  color: white;
+}

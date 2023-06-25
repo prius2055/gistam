@@ -1,5 +1,14 @@
 .navigation-container {
   display: flex;
+  padding-bottom: 1rem;
+  padding-top: 0.5rem;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.navigation-group {
+  display: flex;
   flex-direction: column;
   border-right: 1px #ccc solid;
   padding: 1rem 5rem;
