@@ -1,45 +1,41 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
 import mainArray from '../data/mainArray';
 
-// import usersArray from '../data/usersArray';
+export const fetchContent = createAsyncThunk('fetch/users', async () => {});
 
-
-// const initialState = {
-//   posts: postArrays,
-//   users: localStorage.getItem('users')
-//     ? JSON.parse(localStorage.getItem('users'))
-//     : [],
-//   userIsLoggedIn: false,
-// };
-
-
+// const querySnapshot = await getDocs(collection(db, 'users'));
+// querySnapshot.forEach((doc) => {
+//   // doc.data() is never undefined for query doc snapshots
+//   console.log(doc.id, ' => ', doc.data());
+// });
 
 const initialState = {
-  posts: mainArray,
+  // currentUser: { email: '', password: '' },
+  usersArray: [],
+  isLoading: true,
+  loadingError: undefined,
 };
 
 const postSlice = createSlice({
   name: 'post',
   initialState,
   reducers: {
-    addNewUser: (state, { payload }) => {
-      const newMember = {
-        fullname: payload.firstname + payload.lastname,
-        userName: payload.userName,
-        Email: payload.email,
-        password: payload.password,
-        registrationDate: '',
-        image: payload.image,
-        posts: [],
-        loggedIn: true,
-      };
-      state.posts.push({ id: state.posts.length + 1, ...newMember });
-    },
+    setUser: (state, { payload }) => {
+      const currentUser = state.usersArray.filter(
+        (user) =>
+          user.email === payload.email && user.password === payload.password
+      );
+      currentUser.loggedIn = true;
 
-    addNewUserToStorage: () => {
-      // state.posts.push(payload);
-      // localStorage.setItem('users', JSON.stringify(state.users));
+      const indexOfCurrentUser = state.usersArray.findIndex(
+        (user) =>
+          user.email === payload.email && user.password === payload.password
+      );
+
+      state.usersArray[indexOfCurrentUser] = currentUser;
     },
+    clearUser: () => null,
 
     addNewPost: (state, { payload }) => {
       const newPost = {
@@ -69,32 +65,15 @@ const postSlice = createSlice({
       state.posts = updatedPosts;
       console.log(state.posts);
     },
-    addNewPostToStorage: () => {},
   },
 
-  // extraReducers: (builder) => {
-  //   builder.addCase(storeUsers.fullfiled, (state, { payload }) => {
-
-  //   });
-  // },
+  extraReducers: (builder) => {
+    builder.addCase(fetchContent.fulfilled, (state, { payload }) => {
+      state.usersArray = payload;
+    });
+  },
 });
 
-export const {
-  addNewUser,
-  addNewUserToStorage,
-  addNewPost,
-  addNewPostToStorage,
-} = postSlice.actions;
+export const { setUser, addNewUserToStorage, addNewPost, addNewPostToStorage } =
+  postSlice.actions;
 export default postSlice.reducer;
-
-// const obg = {
-//   postId: 'post2',
-//   topic: '',
-//   intro: '',
-//   date: '',
-//   postContent: {
-//     content: '',
-//     img: '',
-//     video: '',
-//   },
-// };

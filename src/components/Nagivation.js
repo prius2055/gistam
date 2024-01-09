@@ -15,102 +15,102 @@ import Header from './Header';
 import './Navigation.css';
 
 export default function Nagivation() {
-  const { posts } = useSelector((state) => state.post);
+  const { usersArray, isLoading, loadingError } = useSelector(
+    (store) => store.users
+  );
 
-  const loggedInUser = posts.filter((post) => post.loggedIn);
+  console.log(usersArray);
+
+  // const loggedInUser = usersArray.filter(
+  //   (user) =>
+  //     user.email === currentUser.email && user.password === currentUser.password
+  // );
+
 
   return (
-    <div className="navigation-container">
-      <div className="navigation-group">
-        <NavLink to="/" className="logo">
-          CHATTER
-        </NavLink>
-        {/* {loggedInUser.length === 0 &&
-          loggedInUser.map((user) => (
-            <nav className="navigation">
-              <ul className="navbar">
+    <div className="navigation-group">
+      <NavLink to="/" className="logo">
+        CHATTER
+      </NavLink>
+
+      {usersArray.map((user) => (
+        <nav className="navigation">
+          <ul className="navbar">
+            <li>
+              Welcome, <span>{user.firstname}</span>
+            </li>
+            <li>
+              <NavLink to="/newpost">Write a post</NavLink>
+            </li>
+          </ul>
+          <button type="button">Sign out</button>
+        </nav>
+      ))}
+
+      <nav className="navigation">
+        <div className="navbar">
+          <div>
+            <h3>Overview</h3>
+            <ul>
+              <li className="list-group">
+                <img src={feedImage} alt="feed" />
                 <li>
-                  Welcome, <span>{user.fullname}</span>
+                  <NavLink to="/feeds">Feed</NavLink>
                 </li>
-                <li>
-                  <NavLink to="/newpost">Write a post</NavLink>
-                </li>
-              </ul>
-              <button type="button">Sign out</button>
-            </nav>
-          ))} */}
+              </li>
+              <li className="list-group">
+                <FontAwesomeIcon icon={faBookmark} />
+                <li>Bookmarks</li>
+              </li>
+              <li className="list-group">
+                <FontAwesomeIcon icon={faUserGroup} />
+                <li>Team blogs</li>
+              </li>
+              <li className="list-group">
+                <FontAwesomeIcon icon={faEnvelopeOpen} />
+                <li>Drafts</li>
+              </li>
+              <li className="list-group">
+                <img src={chartImage} alt="chart" />
+                <li>Analysis</li>
+              </li>
+            </ul>
+          </div>
 
-        {loggedInUser.length === 0 && (
-          <nav className="navigation">
-            <div className="navbar">
-              <div>
-                <h3>Overview</h3>
-                <ul>
-                  <li className="list-group">
-                    <img src={feedImage} alt="feed" />
-                    <li>
-                      <NavLink to="/feeds">Feed</NavLink>
-                    </li>
-                  </li>
-                  <li className="list-group">
-                    <FontAwesomeIcon icon={faBookmark} />
-                    <li>Bookmarks</li>
-                  </li>
-                  <li className="list-group">
-                    <FontAwesomeIcon icon={faUserGroup} />
-                    <li>Team blogs</li>
-                  </li>
-                  <li className="list-group">
-                    <FontAwesomeIcon icon={faEnvelopeOpen} />
-                    <li>Drafts</li>
-                  </li>
-                  <li className="list-group">
-                    <img src={chartImage} alt="chart" />
-                    <li>Analysis</li>
-                  </li>
-                </ul>
-              </div>
+          <div>
+            {/* <NavLink to="/member">Become a member</NavLink> */}
+            <NavLink to="/member" className="trending">
+              <h3>Trending Tags</h3>
+              <FontAwesomeIcon icon={faArrowTrendUp} />
+            </NavLink>
 
-              <div>
-                {/* <NavLink to="/member">Become a member</NavLink> */}
-                <NavLink to="/member" className="trending">
-                  <h3>Trending Tags</h3>
-                  <FontAwesomeIcon icon={faArrowTrendUp} />
-                </NavLink>
-
-                <ul className="trending-list">
-                  <li>Programming</li>
-                  <li>Data science</li>
-                  <li>Technology</li>
-                  <li>Machine learning</li>
-                  <li>Politics</li>
-                  <li>See all</li>
-                </ul>
-              </div>
-              <div>
-                <h3> Personal</h3>
-                <ul>
-                  <li className="list-group">
-                    <FontAwesomeIcon icon={faUser} />
-                    <li>Account</li>
-                  </li>
-                  <li className="list-group">
-                    <FontAwesomeIcon icon={faBell} />
-                    <li>Notifications</li>
-                  </li>
-                  <li>
-                    <li>Log Out</li>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <button type="button">
-              <NavLink to="/sign">Sign in</NavLink>
-            </button>
-          </nav>
-        )}
-      </div>
-      <Header />
+            <ul className="trending-list">
+              <li>Programming</li>
+              <li>Data science</li>
+              <li>Technology</li>
+              <li>Machine learning</li>
+              <li>Politics</li>
+              <li>See all</li>
+            </ul>
+          </div>
+          <div>
+            <h3> Personal</h3>
+            <ul>
+              <li className="list-group">
+                <FontAwesomeIcon icon={faUser} />
+                <li>Account</li>
+              </li>
+              <li className="list-group">
+                <FontAwesomeIcon icon={faBell} />
+                <li>Notifications</li>
+              </li>
+              <li>
+                <li>Log Out</li>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </div>
   );
 }

@@ -2,28 +2,28 @@
   width: 100%;
 }
 
-.header {
-  padding-left: 5rem;
-  padding-right: 5rem;
+header {
+  padding: 1rem 5rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.header p {
+header p {
   font-size: 2rem;
   color: #543ee0;
 }
 
-.header ul {
+header ul {
   display: flex;
 }
 
-.header ul li {
+header ul li {
   list-style: none;
   margin-left: 2rem;
 }
 
-.header ul li a {
+header ul li a {
   color: black;
   font-weight: 700;
   font-size: 16px;

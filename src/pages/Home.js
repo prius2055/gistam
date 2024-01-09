@@ -15,7 +15,7 @@ import './Home.css';
 export default function Home() {
   return (
     <div className="home">
-      <header className="header">
+      <header>
         <p>CHATTER</p>
         <ul>
           <li>

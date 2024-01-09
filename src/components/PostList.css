@@ -1,0 +1,7 @@
+.post-list {
+  border: 1px #ccc solid;
+  border-bottom: none;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  /* min-height: 100vh; */
+}

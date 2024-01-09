@@ -1,25 +1,37 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchContent } from '../store/postSlice';
+
+
+import Navigation from '../components/Nagivation';
 import PostList from '../components/PostList';
-import { collection, getDocs } from 'firebase/firestore';
-import { database } from '../firebase/firebaseConfig';
+import Header from '../components/Header';
+
 import './Feeds.css';
 
 export default function Feeds() {
-  const collectionRef = collection(database, 'users');
+  const { usersArray, currentUsers, isLoading, loadingError } = useSelector(
+    (store) => store.users
+  );
 
-  const getData = () => {
-    getDocs(collectionRef).then((response) => {
-      console.log(
-        response.docs.map((item) => {
-          return item.data();
-        })
-      );
-    });
-  };
+  // console.log(usersArray);
+  // console.log(currentUsers);
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContent());
+  }, []);
+
+  ////////////////////////////////////////////////
   return (
     <div className="feed">
-      <PostList />
-      <button onClick={getData}>get post nice post</button>
+      <Navigation />
+      <div className="feed-group">
+        <Header />
+        <PostList />
+      </div>
+      {/* <button onClick={getData}>get post nice post</button> */}
     </div>
   );
 }

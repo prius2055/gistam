@@ -1,9 +1,9 @@
-.App-container {
+.App {
   height: 100vh;
-  display: flex;
+  /* width: 100%; */
 }
 
-.app {
+/* .app {
   width: 100%;
 }
 
@@ -13,4 +13,4 @@
   margin-left: 1.5rem;
   margin-top: 2rem;
   height: 100%;
-}
+} */
