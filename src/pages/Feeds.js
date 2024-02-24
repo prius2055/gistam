@@ -25,7 +25,7 @@ export default function Feeds() {
 
   return (
     <div className="feed">
-      {/* <Navigation /> */}
+      <Navigation />
       <div className="feed-group">
         <Header />
         <PostList />

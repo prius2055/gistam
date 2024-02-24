@@ -19,13 +19,12 @@ export default function Nagivation() {
     (store) => store.users
   );
 
-  console.log(usersArray);
+
 
   // const loggedInUser = usersArray.filter(
   //   (user) =>
   //     user.email === currentUser.email && user.password === currentUser.password
   // );
-
 
   return (
     <div className="navigation-group">
@@ -33,7 +32,7 @@ export default function Nagivation() {
         CHATTER
       </NavLink>
 
-      {usersArray.map((user) => (
+      {usersArray?.map((user) => (
         <nav className="navigation">
           <ul className="navbar">
             <li>
@@ -54,25 +53,23 @@ export default function Nagivation() {
             <ul>
               <li className="list-group">
                 <img src={feedImage} alt="feed" />
-                <li>
-                  <NavLink to="/feeds">Feed</NavLink>
-                </li>
+                <NavLink to="/feeds">Feed</NavLink>
               </li>
               <li className="list-group">
                 <FontAwesomeIcon icon={faBookmark} />
-                <li>Bookmarks</li>
+                <p>Bookmarks</p>
               </li>
               <li className="list-group">
                 <FontAwesomeIcon icon={faUserGroup} />
-                <li>Team blogs</li>
+                <p> Team blogs</p>
               </li>
               <li className="list-group">
                 <FontAwesomeIcon icon={faEnvelopeOpen} />
-                <li>Drafts</li>
+                <p>Drafts</p>
               </li>
               <li className="list-group">
                 <img src={chartImage} alt="chart" />
-                <li>Analysis</li>
+                <p>Analysis</p>
               </li>
             </ul>
           </div>
@@ -98,15 +95,13 @@ export default function Nagivation() {
             <ul>
               <li className="list-group">
                 <FontAwesomeIcon icon={faUser} />
-                <li>Account</li>
+                <p> Account</p>
               </li>
               <li className="list-group">
                 <FontAwesomeIcon icon={faBell} />
-                <li>Notifications</li>
+                <p> Notifications</p>
               </li>
-              <li>
-                <li>Log Out</li>
-              </li>
+              <li>Log Out</li>
             </ul>
           </div>
         </div>
