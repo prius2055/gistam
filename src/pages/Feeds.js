@@ -14,8 +14,7 @@ export default function Feeds() {
     (store) => store.users
   );
 
-  // console.log(usersArray);
-  // console.log(currentUsers);
+
 
   const dispatch = useDispatch();
 
@@ -23,10 +22,10 @@ export default function Feeds() {
     dispatch(fetchContent());
   }, []);
 
-  ////////////////////////////////////////////////
+
   return (
     <div className="feed">
-      <Navigation />
+      {/* <Navigation /> */}
       <div className="feed-group">
         <Header />
         <PostList />

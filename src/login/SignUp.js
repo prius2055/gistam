@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { setUser } from '../store/postSlice';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import './Sign.css';
@@ -30,7 +30,7 @@ const userData = {
 
 // const auth = getAuth();
 
-const Sign = () => {
+const SignUp = () => {
   const navigate = useNavigate();
 
   const [showLogin, setShowLogin] = useState(true);
@@ -40,11 +40,6 @@ const Sign = () => {
   const [loginError, setLoginError] = useState(false);
 
   const [authUser, setAuthUser] = useState(null);
-
-  const collectionRef = collection(database, 'users');
-  const loggedInRef = doc(database, 'users', 'loggedIn');
-
-  const provider = new GoogleAuthProvider();
 
   const dispatch = useDispatch();
 
@@ -89,7 +84,6 @@ const Sign = () => {
   // WITH GOOGLE EMAIL/PASSWORD SIGN UP
   const signUpHandler = (e) => {
     e.preventDefault();
-    
   };
 
   //WITH GOOGLE SIGN UP
@@ -147,9 +141,6 @@ const Sign = () => {
   // HANDLE FORM FOR EXISTING USERS
   const logInHandler = async (e) => {
     e.preventDefault();
-    
-
-   
   };
 
   //AUTHENTICATE USER
@@ -208,100 +199,82 @@ const Sign = () => {
             >
               REGISTER
             </h4>
-            <h4
+            <NavLink
+              to="/login"
               className={showLogin ? 'blue-border' : 'grey-border'}
-              onClick={showLoginForm}
             >
               LOGIN
-            </h4>
+            </NavLink>
           </div>
-
-          {!showLogin && showRegister && (
-            <div className="sign-in-form-area">
-              <h2>Register as a writer/reader</h2>
-              <div className="name-field">
-                <label className="first-name-label">
-                  First name
-                  <input
-                    name="firstname"
-                    type="text"
-                    onChange={firstNameHandler}
-                    value={userLogin.firstname}
-                  />
-                </label>
-                <label>
-                  Last name
-                  <input
-                    type="text"
-                    onChange={lastNameHandler}
-                    value={userLogin.lastname}
-                  />
-                </label>
-              </div>
-
-              <label>
-                You are joining as?
-                <select onChange={roleHandler}>
-                  <option>Writer</option>
-                  <option>Reader</option>
-                </select>
-              </label>
-              <label>
-                Email address
+          <div className="sign-in-form-area">
+            <h2>Register as a writer/reader</h2>
+            <div className="name-field">
+              <label className="first-name-label">
+                First name
                 <input
-                  type="email"
-                  onChange={emailHandler}
-                  value={userLogin.email}
+                  name="firstname"
+                  type="text"
+                  onChange={firstNameHandler}
+                  value={userLogin.firstname}
                 />
               </label>
               <label>
-                Password
+                Last name
                 <input
-                  type="password"
-                  onChange={passwordHandler}
-                  value={userLogin.password}
+                  type="text"
+                  onChange={lastNameHandler}
+                  value={userLogin.lastname}
                 />
               </label>
-              <label>
-                Confirm password
-                <input
-                  type="password"
-                  onChange={confirmPasswordHandler}
-                  value={userLogin.confirmPassword}
-                />
-              </label>
-              <button
-                className="account-btn"
-                type="submit"
-                onClick={signUpHandler}
-              >
-                Create account
-              </button>
-              <button onClick={googleSignUpHandler} type="submit">
-                Sign up with google
-              </button>
-              {/* <button>Sign up with LinkedIn</button> */}
             </div>
-          )}
 
-          {showLogin && !showRegister && (
-            <form className="sign-in-form-area" onSubmit={logInHandler}>
-              <h2>Welcome back</h2>
-              <label>
-                Email address
-                <input type="email" onChange={emailHandler} />
-              </label>
-              <label>
-                Password
-                <input type="password" onChange={passwordHandler} />
-              </label>
-              <button className="account-btn">Log in</button>
-            </form>
-          )}
+            <label>
+              You are joining as?
+              <select onChange={roleHandler}>
+                <option>Writer</option>
+                <option>Reader</option>
+              </select>
+            </label>
+            <label>
+              Email address
+              <input
+                type="email"
+                onChange={emailHandler}
+                value={userLogin.email}
+              />
+            </label>
+            <label>
+              Password
+              <input
+                type="password"
+                onChange={passwordHandler}
+                value={userLogin.password}
+              />
+            </label>
+            <label>
+              Confirm password
+              <input
+                type="password"
+                onChange={confirmPasswordHandler}
+                value={userLogin.confirmPassword}
+              />
+            </label>
+            <button
+              className="account-btn"
+              type="submit"
+              onClick={signUpHandler}
+            >
+              Create account
+            </button>
+            <button onClick={googleSignUpHandler} type="submit">
+              Sign up with google
+            </button>
+            {/* <button>Sign up with LinkedIn</button> */}
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default Sign;
+export default SignUp;

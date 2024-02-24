@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux';
 import Feeds from './pages/Feeds';
 import Navigation from './components/Nagivation';
 import Home from './pages/Home';
-import Sign from './pages/Sign';
+import SignUp from './login/SignUp';
+import LogIn from './login/LogIn';
 import NewPost from './pages/NewPost';
 import Header from './components/Header';
 
@@ -17,7 +18,8 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/sign-in" element={<Sign />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<LogIn />} />
         <Route path="/feeds" element={<Feeds />} />
         {/* <Route path="/feeds" element={<Navigation />} /> */}
       </Routes>
