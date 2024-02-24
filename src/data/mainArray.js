@@ -2,6 +2,7 @@ const mainArray = [
   {
     id: 'user1',
     fullname: 'Prince Nwuke',
+    userName: '',
     Email: 'prius@gmail.com',
     password: '123456',
     registrationDate: '',
@@ -39,6 +40,7 @@ const mainArray = [
   {
     id: 'user2',
     fullname: 'Favour Amanosi',
+    userName: '',
     Email: 'fav@gmail.com',
     password: '123456',
     registrationDate: '',

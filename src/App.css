@@ -1,4 +1,16 @@
 .App {
-  margin: 0 auto;
   height: 100vh;
+  /* width: 100%; */
 }
+
+/* .app {
+  width: 100%;
+}
+
+.pages {
+  width: 95%;
+  border: 1px #ccc solid;
+  margin-left: 1.5rem;
+  margin-top: 2rem;
+  height: 100%;
+} */

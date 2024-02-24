@@ -3,7 +3,7 @@
 <div align="center">
   <br/>
 
-  <h3><b>Math magicians</b></h3>
+  <h3><b>ChatterApp</b></h3>
 
 </div>
 

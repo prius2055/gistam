@@ -1,0 +1,15 @@
+.feed {
+  display: flex;
+  width: 100%;
+}
+
+.feed-group {
+  width: 100%;
+}
+
+.feed button {
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+
+  margin-left: 10rem;
+}

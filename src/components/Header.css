@@ -1,43 +1,34 @@
 .header {
   display: flex;
   justify-content: space-between;
-  padding: 0 300px;
   align-items: center;
-  margin-bottom: 20px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px #ccc solid;
+  width: 100%;
 }
 
-.navigation {
+.search {
   display: flex;
   align-items: center;
+  border: 1px #ccc solid;
+  border-radius: 0.5rem;
+  padding: 0 0.5rem;
+  margin-left: 30rem;
+  width: 35%;
 }
 
-.navigation button {
-  margin-left: 1rem;
-  padding: 0.3rem 1.2rem;
-  cursor: pointer;
+.profile {
+  margin-right: 4rem;
 }
 
-.navbar {
-  display: flex;
+.search input {
+  border: none;
+  outline: none;
+  padding: 1rem;
+  font-size: 1.2rem;
 }
 
-.navbar li {
-  margin-left: 30px;
-  list-style: none;
-  padding: 5px;
-  font-weight: 500;
-  cursor: pointer;
-}
-
-a {
-  text-decoration: none;
-  color: #444;
-}
-
-.navbar a.active {
-  color: black;
-  border-bottom: 2px solid red;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
+.header-icons {
+  height: 1.5rem;
 }
