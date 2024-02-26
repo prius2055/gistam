@@ -53,7 +53,7 @@ export default function Nagivation() {
             <ul>
               <li className="list-group">
                 <img src={feedImage} alt="feed" />
-                <NavLink to="/feeds">Feed</NavLink>
+                <p>Feed</p>
               </li>
               <li className="list-group">
                 <FontAwesomeIcon icon={faBookmark} />

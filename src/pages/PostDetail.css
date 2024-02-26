@@ -1,0 +1,65 @@
+.post-detail-container {
+  display: flex;
+}
+
+.post-detail {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.post-highlight {
+  border-top: 4px solid #7664e6;
+  border-bottom: 4px solid #7664e6;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+}
+
+.post-highlight h3 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.post-highlight button {
+  padding: 0.8rem 1rem;
+  background: #543ee0;
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.post-analytics h2 {
+  margin-bottom: 1.5rem;
+}
+
+.top-post {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.top-post p {
+  margin-left: 1.5rem;
+}
+
+.post-analytics span {
+  margin-right: 0.5rem;
+}
+
+.post-detail-footer {
+  display: flex;
+}
+
+.pd-footer {
+  margin-right: 2rem;
+}
+
+.pd-footer-info {
+  margin-bottom: 1rem;
+}
+
+.pd-footer-info-val {
+  font-weight: 500;
+}

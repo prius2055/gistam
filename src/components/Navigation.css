@@ -12,6 +12,9 @@
   height: 100vh;
   width: 20%;
   border-right: 1px #ccc solid;
+  position: sticky;
+  top: 0;
+
   /* margin-bottom: 20px; */
   /* box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px; */
 }
@@ -45,8 +48,8 @@
   margin-bottom: 1.8rem;
 }
 
-.list-group li {
-  margin-left: 1rem;
+.list-group p {
+  margin-left: 0.5rem;
 }
 
 .trending {

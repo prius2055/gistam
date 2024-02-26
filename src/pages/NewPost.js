@@ -12,6 +12,8 @@ import PostList from '../components/PostList';
 
 import './NewPost.css';
 import { NavLink } from 'react-router-dom';
+import Header from '../components/Header';
+import Navigation from '../components/Navigation';
 
 const newPostObj = {
   id: '',
@@ -27,11 +29,12 @@ const NewPost = () => {
   const [showOtherIcons, setShowOtherIcons] = useState(false);
   const [newPost, setnewPost] = useState(newPostObj);
 
-  const { posts } = useSelector((state) => state.post);
-  const dispatch = useDispatch();
-  const hiddenFileInput = useRef();
+  // const { posts } = useSelector((state) => state.post);
+  // const dispatch = useDispatch();
+  const hiddenFileImageInput = useRef();
+  const hiddenFileVideoInput = useRef();
 
-  const loggedInUser = posts.filter((post) => post.loggedIn);
+  // const loggedInUser = posts.filter((post) => post.loggedIn);
 
   const topicHandler = (e) => {
     e.preventDefault();
@@ -51,7 +54,7 @@ const NewPost = () => {
 
   const attachImageHandler = (e) => {
     e.preventDefault();
-    hiddenFileInput.current.click();
+    hiddenFileImageInput.current.click();
   };
 
   const attachImageFunc = (e) => {
@@ -66,7 +69,7 @@ const NewPost = () => {
 
   const attachVideoHandler = (e) => {
     e.preventDefault();
-    hiddenFileInput.current.click();
+    hiddenFileVideoInput.current.click();
   };
 
   const attachVideoFunc = (e) => {
@@ -101,86 +104,94 @@ const NewPost = () => {
   };
 
   return (
-    <div>
-      <form className="form" onSubmit={submitPostHandler}>
-        <button type="submit">
-          <NavLink to="/">Publish</NavLink>
-        </button>
+    <div className="new-post">
+      <Navigation />
+      <div className='main-post-grp'>
+        <Header />
+        <form className="form" onSubmit={submitPostHandler}>
+          <button type="submit">
+            <NavLink to="/">Publish</NavLink>
+          </button>
 
-        <div className="form-group">
-          <div className="form-inputs">
-            {!showOtherIcons && (
-              <FontAwesomeIcon
-                icon={faPlus}
-                className="form-icon"
-                onClick={showOtherIconsHandler}
-              />
-            )}
+          <div className="form-group">
+            <div className="form-inputs">
+              {!showOtherIcons && (
+                <FontAwesomeIcon
+                  icon={faPlus}
+                  className="form-icon"
+                  onClick={showOtherIconsHandler}
+                />
+              )}
 
-            {showOtherIcons && (
-              <div className="form-attachment-group">
-                <FontAwesomeIcon
-                  icon={faXmark}
-                  className="form-icon icon-xmark"
-                  onClick={closeOtherIconsHandler}
-                />
-                <FontAwesomeIcon
-                  icon={faImage}
-                  className="form-icon icon-image"
-                  onClick={attachImageHandler}
-                />
-                <FontAwesomeIcon
-                  icon={faVideo}
-                  className="form-icon icon-video"
-                  onClick={attachVideoHandler}
-                />
-                <div className="form-attachments">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    ref={hiddenFileInput}
-                    onChange={attachImageFunc}
+              {showOtherIcons && (
+                <div className="form-attachment-group">
+                  <FontAwesomeIcon
+                    icon={faXmark}
+                    className="form-icon icon-xmark"
+                    onClick={closeOtherIconsHandler}
                   />
-                  <input
-                    type="file"
-                    accept="video/*"
-                    ref={hiddenFileInput}
-                    onChange={attachVideoFunc}
+                  <FontAwesomeIcon
+                    icon={faImage}
+                    className="form-icon icon-image"
+                    onClick={attachImageHandler}
                   />
+                  <FontAwesomeIcon
+                    icon={faVideo}
+                    className="form-icon icon-video"
+                    onClick={attachVideoHandler}
+                  />
+                  <div className="form-attachments">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      ref={hiddenFileImageInput}
+                      onChange={attachImageFunc}
+                    />
+                    <input
+                      type="file"
+                      accept="video/*"
+                      ref={hiddenFileVideoInput}
+                      onChange={attachVideoFunc}
+                    />
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {!showOtherIcons && (
-              <input type="text" placeholder="Title" onChange={topicHandler} />
-            )}
-          </div>
-
-          <div
-            className="text-area"
-            contentEditable="true"
-            onInput={contentHandler}
-          >
-            Write a post...
-            {newPost.previewImageURL && (
-              <img
-                src={newPost.previewImageURL}
-                width="250px"
-                alt="Image preview"
-              />
-            )}
-            {newPost.previewVideoURL && (
-              <video width="250" height="250" controls>
-                <source
-                  src={newPost.previewVideoURL}
-                  type={newPost.videoFile.type}
+              {!showOtherIcons && (
+                <input
+                  type="text"
+                  placeholder="Title"
+                  onChange={topicHandler}
                 />
-                Your browser does not support the video tag.
-              </video>
-            )}
+              )}
+            </div>
+
+            <div className='hidden-inputs'>
+              {newPost.previewImageURL && (
+                <img
+                  src={newPost.previewImageURL}
+                  width="300px"
+                  alt="Image preview"
+                />
+              )}
+              {newPost.previewVideoURL && (
+                <video width="250" height="250" controls>
+                  <source
+                    src={newPost.previewVideoURL}
+                    type={newPost.videoFile.type}
+                  />
+                  Your browser does not support the video tag.
+                </video>
+              )}
+              <textarea
+                className="text-area"
+                onInput={contentHandler}
+                placeholder="Write a post..."
+              ></textarea>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };
