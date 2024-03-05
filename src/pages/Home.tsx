@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
@@ -12,7 +13,7 @@ import TestimonialImage4 from '../img/testimonial-4.jpg';
 
 import './Home.css';
 
-export default function Home() {
+const Home: React.FC = () => {
   return (
     <div className="home">
       <header>
@@ -185,4 +186,6 @@ export default function Home() {
       </section>
     </div>
   );
-}
+};
+
+export default Home

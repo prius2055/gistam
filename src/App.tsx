@@ -1,3 +1,4 @@
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Feeds from './pages/Feeds';
@@ -6,12 +7,11 @@ import Home from './pages/Home';
 import SignUp from './login/SignUp';
 import LogIn from './login/LogIn';
 import NewPost from './pages/NewPost';
-import Header from './components/Header';
-
-import './App.css';
 import PostAnalytics from './pages/PostDetail';
 
-function App() {
+import './App.css';
+
+const App: React.FC = () => {
   // const { posts } = useSelector((state) => state.post);
 
   return (
@@ -41,6 +41,6 @@ function App() {
       </div> */}
     </div>
   );
-}
+};
 
 export default App;

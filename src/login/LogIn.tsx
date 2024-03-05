@@ -1,5 +1,6 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
-import { setUser } from '../store/postSlice';
+// import { setUser } from '../store/postSlice';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -30,7 +31,7 @@ const userData = {
 
 // const auth = getAuth();
 
-const LogIn = () => {
+const LogIn: React.FC = () => {
   const navigate = useNavigate();
 
   const [showLogin, setShowLogin] = useState(true);
@@ -53,93 +54,70 @@ const LogIn = () => {
     setShowRegister(true);
   };
 
-  const firstNameHandler = (e) => {
-    setUserLogIn((prev) => ({ ...prev, firstname: e.target.value }));
-  };
-
-  const lastNameHandler = (e) => {
-    setUserLogIn((prev) => ({ ...prev, lastname: e.target.value }));
-  };
-
-  const roleHandler = (e) => {
-    setUserLogIn((prev) => ({ ...prev, role: e.target.value }));
-  };
-
-  const emailHandler = (e) => {
-    setUserLogIn((prev) => ({ ...prev, email: e.target.value }));
-  };
-
-  const passwordHandler = (e) => {
-    setUserLogIn((prev) => ({ ...prev, password: e.target.value.trim() }));
-  };
-
-  const confirmPasswordHandler = (e) => {
-    setUserLogIn((prev) => ({
-      ...prev,
-      confirmPassword: e.target.value.trim(),
-    }));
-  };
+  // const passwordHandler = (e: React.FormEvent<EventTarget>) => {
+  //   setUserLogIn((prev) => ({ ...prev, password: e.target.value.trim() }));
+  // };
 
   // HANDLE FORM FOR NEW REGISTRATION
   // WITH GOOGLE EMAIL/PASSWORD SIGN UP
-  const signUpHandler = (e) => {
-    e.preventDefault();
-  };
+  // const signUpHandler = (e) => {
+  //   e.preventDefault();
+  // };
 
   //WITH GOOGLE SIGN UP
-  const googleSignUpHandler = (e) => {
-    e.preventDefault();
-    signInWithPopup(auth, provider);
+  // const googleSignUpHandler = (e) => {
+  //   e.preventDefault();
+  //   signInWithPopup(auth, provider);
 
-    // await addDoc(collectionRef, {
-    //   firstname: '',
-    //   lastname: '',
-    //   displayName: user.displayName,
-    //   role: '',
-    //   email: user.email,
-    //   image: '',
-    //   loggedIn: user.emailVerified,
-    //   registrationDate: '',
-    //   posts: [
-    //     {
-    //       postId: 'post1',
-    //       topic: 'Software Engineering',
-    //       intro: 'Software...',
-    //       date: '',
-    //       postContent: {
-    //         content:
-    //           'I want to start by saying that there is no bad programming language. Every programming language has a role and is very important to the applications the world uses daily. As some of the older programming languages are getting replaced by newer ones that are also much higher in demand, it makes more sense to focus on learning those. The cool thing about programming languages is that the basic syntax is usually the same. So once you have a solid understanding of one language, picking another language becomes much easier.',
-    //         img: '',
-    //         video: '',
-    //       },
-    //     },
+  //   // await addDoc(collectionRef, {
+  //   //   firstname: '',
+  //   //   lastname: '',
+  //   //   displayName: user.displayName,
+  //   //   role: '',
+  //   //   email: user.email,
+  //   //   image: '',
+  //   //   loggedIn: user.emailVerified,
+  //   //   registrationDate: '',
+  //   //   posts: [
+  //   //     {
+  //   //       postId: 'post1',
+  //   //       topic: 'Software Engineering',
+  //   //       intro: 'Software...',
+  //   //       date: '',
+  //   //       postContent: {
+  //   //         content:
+  //   //           'I want to start by saying that there is no bad programming language. Every programming language has a role and is very important to the applications the world uses daily. As some of the older programming languages are getting replaced by newer ones that are also much higher in demand, it makes more sense to focus on learning those. The cool thing about programming languages is that the basic syntax is usually the same. So once you have a solid understanding of one language, picking another language becomes much easier.',
+  //   //         img: '',
+  //   //         video: '',
+  //   //       },
+  //   //     },
 
-    //     {
-    //       postId: 'post2',
-    //       topic: 'Digital marketing',
-    //       intro: 'Digital marketing...',
-    //       date: '',
-    //       postContent: {
-    //         content:
-    //           'Firebase provides some great services like NoSQL databases, authentication, cloud storage, and much more. In this tutorial, we will learn how to use your React application to read and add data to your Firebase database.To demonstrate this, we will learn how to build a Todo app using React and Cloud Firestore (Firebase9 web SDK). Before we start building.',
-    //         img: '',
-    //         video: '',
-    //       },
-    //     },
-    //   ],
-    // })
-    //   .then(() => {
-    //     alert('User created');
-    //   })
-    //   .catch((err) => {
-    //     alert(err.message);
-    //   });
+  //   //     {
+  //   //       postId: 'post2',
+  //   //       topic: 'Digital marketing',
+  //   //       intro: 'Digital marketing...',
+  //   //       date: '',
+  //   //       postContent: {
+  //   //         content:
+  //   //           'Firebase provides some great services like NoSQL databases, authentication, cloud storage, and much more. In this tutorial, we will learn how to use your React application to read and add data to your Firebase database.To demonstrate this, we will learn how to build a Todo app using React and Cloud Firestore (Firebase9 web SDK). Before we start building.',
+  //   //         img: '',
+  //   //         video: '',
+  //   //       },
+  //   //     },
+  //   //   ],
+  //   // })
+  //   //   .then(() => {
+  //   //     alert('User created');
+  //   //   })
+  //   //   .catch((err) => {
+  //   //     alert(err.message);
+  //   //   });
 
-    // user && navigate('/feeds');
-  };
+  //   // user && navigate('/feeds');
+  // };
 
   // HANDLE FORM FOR EXISTING USERS
-  const logInHandler = async (e) => {
+  const logInHandler = async (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
   };
 
@@ -206,11 +184,24 @@ const LogIn = () => {
             <h2>Welcome back</h2>
             <label>
               Email address
-              <input type="email" onChange={emailHandler} />
+              <input
+                type="email"
+                onChange={(e) => {
+                  setUserLogIn((prev) => ({ ...prev, email: e.target.value }));
+                }}
+              />
             </label>
             <label>
               Password
-              <input type="password" onChange={passwordHandler} />
+              <input
+                type="password"
+                onChange={(e) => {
+                  setUserLogIn((prev) => ({
+                    ...prev,
+                    password: e.target.value.trim(),
+                  }));
+                }}
+              />
             </label>
             <button className="account-btn">Log in</button>
           </form>

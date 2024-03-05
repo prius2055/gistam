@@ -1,3 +1,4 @@
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,16 +11,12 @@ import {
 import { faUserGroup, faArrowTrendUp } from '@fortawesome/free-solid-svg-icons';
 import feedImage from '../img/feed.png';
 import chartImage from '../img/chart.png';
-import Header from './Header';
-
 import './Navigation.css';
 
-export default function Nagivation() {
-  const { usersArray, isLoading, loadingError } = useSelector(
-    (store) => store.users
-  );
-
-
+const Navigation: React.FC = () => {
+  // const { usersArray, isLoading, loadingError } = useSelector(
+  //   (store) => store.users
+  // );
 
   // const loggedInUser = usersArray.filter(
   //   (user) =>
@@ -32,7 +29,7 @@ export default function Nagivation() {
         CHATTER
       </NavLink>
 
-      {usersArray?.map((user) => (
+      {/* {usersArray?.map((user) => (
         <nav className="navigation">
           <ul className="navbar">
             <li>
@@ -44,7 +41,7 @@ export default function Nagivation() {
           </ul>
           <button type="button">Sign out</button>
         </nav>
-      ))}
+      ))} */}
 
       <nav className="navigation">
         <div className="navbar">
@@ -108,4 +105,6 @@ export default function Nagivation() {
       </nav>
     </div>
   );
-}
+};
+
+export default Navigation;

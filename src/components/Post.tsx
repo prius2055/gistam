@@ -1,3 +1,4 @@
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Post.css';
 import { VscBook } from 'react-icons/vsc';
@@ -7,8 +8,7 @@ import { FaRegComments } from 'react-icons/fa';
 import { FaRegHeart } from 'react-icons/fa';
 import { MdOutlineViewStream } from 'react-icons/md';
 
-const Post = ({ postItem }) => {
-  console.log('post');
+const Post: React.FC = () => {
 
   return (
     <div className="post">

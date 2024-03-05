@@ -1,6 +1,7 @@
+import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchContent } from '../store/postSlice';
+// import { fetchContent } from '../store/postSlice';
 
 import Navigation from '../components/Navigation';
 import PostList from '../components/PostList';
@@ -8,16 +9,16 @@ import Header from '../components/Header';
 
 import './Feeds.css';
 
-export default function Feeds() {
-  const { usersArray, currentUsers, isLoading, loadingError } = useSelector(
-    (store) => store.users
-  );
+const Feeds: React.FC = () => {
+  // const { usersArray, currentUsers, isLoading, loadingError } = useSelector(
+  //   (store) => store.users
+  // );
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchContent());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchContent());
+  // }, []);
 
   return (
     <div className="feeds">
@@ -29,4 +30,6 @@ export default function Feeds() {
       {/* <button onClick={getData}>get post nice post</button> */}
     </div>
   );
-}
+};
+
+export default Feeds;

@@ -1,3 +1,4 @@
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { FaPencil } from 'react-icons/fa6';
 import Post from '../components/Post';
@@ -5,7 +6,7 @@ import './PostDetail.css';
 import Nagivation from '../components/Navigation';
 import Header from '../components/Header';
 
-const PostAnalytics = () => {
+const PostAnalytics: React.FC = () => {
   // const { posts } = useSelector((store) => store.post);
 
   // const filteredPosts = posts.filter((post) => post.posts.length !== 0);

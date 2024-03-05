@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNewPost, addNewPostToStorage } from '../store/postSlice';
+// import { addNewPost, addNewPostToStorage } from '../store/postSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faImage,
@@ -15,71 +15,83 @@ import { NavLink } from 'react-router-dom';
 import Header from '../components/Header';
 import Navigation from '../components/Navigation';
 
-const newPostObj = {
-  id: '',
-  topic: '',
-  content: '',
-  imageFile: '',
-  videoFile: '',
-  previewImageURL: '',
-  previewVideoURL: '',
+type NewPostObj = {
+  id: string;
+  topic: string;
+  content: string;
+  imageFile: object | string;
+  videoFile: object | string;
+  previewImageURL: string;
+  previewVideoURL: string;
 };
 
-const NewPost = () => {
+const NewPost: React.FC = () => {
   const [showOtherIcons, setShowOtherIcons] = useState(false);
-  const [newPost, setnewPost] = useState(newPostObj);
+  const [newPost, setnewPost] = useState<NewPostObj>({
+    id: '',
+    topic: '',
+    content: '',
+    imageFile: {},
+    videoFile: {},
+    previewImageURL: '',
+    previewVideoURL: '',
+  });
 
   // const { posts } = useSelector((state) => state.post);
   // const dispatch = useDispatch();
-  const hiddenFileImageInput = useRef();
-  const hiddenFileVideoInput = useRef();
+  const hiddenFileImageInput = useRef<HTMLInputElement | null>(null);
+  const hiddenFileVideoInput = useRef<HTMLInputElement | null>(null);
 
   // const loggedInUser = posts.filter((post) => post.loggedIn);
 
-  const topicHandler = (e) => {
+  const attachImageHandler = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
-    setnewPost((prev) => ({
-      ...prev,
-      topic: e.target.value,
-      id: loggedInUser[0].id,
-    }));
+    hiddenFileImageInput.current?.click();
   };
 
-  const contentHandler = (e) => {
-    setnewPost((prev) => ({
-      ...prev,
-      content: e.target.innerText,
-    }));
+  const attachImageFunc = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    const file = e.target.files?.[0];
+
+    if (file) {
+      setnewPost((prev) => ({
+        ...prev,
+        imageFile: file,
+        previewImageURL: URL.createObjectURL(file),
+      }));
+    } else {
+      // Handle case where no file is selected
+      setnewPost((prev) => ({
+        ...prev,
+        imageFile: '', // Set a default value or handle as needed
+      }));
+    }
   };
 
-  const attachImageHandler = (e) => {
+  const attachVideoHandler = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
-    hiddenFileImageInput.current.click();
+    hiddenFileVideoInput.current?.click();
   };
 
-  const attachImageFunc = (e) => {
+  const attachVideoFunc = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    const file = e.target.files[0];
-    setnewPost((prev) => ({
-      ...prev,
-      imageFile: file,
-      previewImageURL: URL.createObjectURL(file),
-    }));
-  };
 
-  const attachVideoHandler = (e) => {
-    e.preventDefault();
-    hiddenFileVideoInput.current.click();
-  };
+    const file = e.target.files?.[0];
 
-  const attachVideoFunc = (e) => {
-    e.preventDefault();
-    const file = e.target.files[0];
-    setnewPost((prev) => ({
-      ...prev,
-      videoFile: file,
-      previewVideoURL: URL.createObjectURL(file),
-    }));
+    if (file) {
+      setnewPost((prev) => ({
+        ...prev,
+        videoFile: file,
+        previewImageURL: URL.createObjectURL(file),
+      }));
+    } else {
+      // Handle case where no file is selected
+      setnewPost((prev) => ({
+        ...prev,
+        videoFile: '', // Set a default value or handle as needed
+      }));
+    }
   };
 
   const showOtherIconsHandler = () => {
@@ -90,28 +102,26 @@ const NewPost = () => {
     setShowOtherIcons(false);
   };
 
-  const submitPostHandler = (e) => {
+  const submitPostHandler = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
     console.log(newPost);
-    dispatch(addNewPost(newPost));
-    dispatch(addNewPostToStorage(newPost));
+    // dispatch(addNewPost(newPost));
+    // dispatch(addNewPostToStorage(newPost));
 
-    // setnewPost((prev) => ({
-    //   ...prev,
-    //   topic: '',
-    //   content: '',
-    // }));
+    setnewPost((prev) => ({
+      ...prev,
+      topic: '',
+      content: '',
+    }));
   };
 
   return (
     <div className="new-post">
       <Navigation />
-      <div className='main-post-grp'>
+      <div className="main-post-grp">
         <Header />
         <form className="form" onSubmit={submitPostHandler}>
-          <button type="submit">
-            <NavLink to="/">Publish</NavLink>
-          </button>
+          <button type="submit">Publish</button>
 
           <div className="form-group">
             <div className="form-inputs">
@@ -144,6 +154,7 @@ const NewPost = () => {
                     <input
                       type="file"
                       accept="image/*"
+                      multiple
                       ref={hiddenFileImageInput}
                       onChange={attachImageFunc}
                     />
@@ -160,13 +171,20 @@ const NewPost = () => {
               {!showOtherIcons && (
                 <input
                   type="text"
+                  value={newPost.topic}
                   placeholder="Title"
-                  onChange={topicHandler}
+                  onChange={(e) =>
+                    setnewPost((prev) => ({
+                      ...prev,
+                      topic: e.target.value,
+                      // id: loggedInUser[0].id,
+                    }))
+                  }
                 />
               )}
             </div>
 
-            <div className='hidden-inputs'>
+            <div className="hidden-inputs">
               {newPost.previewImageURL && (
                 <img
                   src={newPost.previewImageURL}
@@ -176,16 +194,19 @@ const NewPost = () => {
               )}
               {newPost.previewVideoURL && (
                 <video width="250" height="250" controls>
-                  <source
-                    src={newPost.previewVideoURL}
-                    type={newPost.videoFile.type}
-                  />
+                  <source src={newPost.previewVideoURL} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               )}
               <textarea
+                value={newPost.content}
                 className="text-area"
-                onInput={contentHandler}
+                onChange={(e) =>
+                  setnewPost((prev) => ({
+                    ...prev,
+                    content: e.target.value,
+                  }))
+                }
                 placeholder="Write a post..."
               ></textarea>
             </div>
