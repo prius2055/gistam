@@ -1,3 +1,4 @@
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,22 +11,17 @@ import {
 import { faUserGroup, faArrowTrendUp } from '@fortawesome/free-solid-svg-icons';
 import feedImage from '../img/feed.png';
 import chartImage from '../img/chart.png';
-import Header from './Header';
-
 import './Navigation.css';
 
-export default function Nagivation() {
-  const { usersArray, isLoading, loadingError } = useSelector(
-    (store) => store.users
-  );
-
-  console.log(usersArray);
+const Navigation: React.FC = () => {
+  // const { usersArray, isLoading, loadingError } = useSelector(
+  //   (store) => store.users
+  // );
 
   // const loggedInUser = usersArray.filter(
   //   (user) =>
   //     user.email === currentUser.email && user.password === currentUser.password
   // );
-
 
   return (
     <div className="navigation-group">
@@ -33,7 +29,7 @@ export default function Nagivation() {
         CHATTER
       </NavLink>
 
-      {usersArray.map((user) => (
+      {/* {usersArray?.map((user) => (
         <nav className="navigation">
           <ul className="navbar">
             <li>
@@ -45,7 +41,7 @@ export default function Nagivation() {
           </ul>
           <button type="button">Sign out</button>
         </nav>
-      ))}
+      ))} */}
 
       <nav className="navigation">
         <div className="navbar">
@@ -54,25 +50,23 @@ export default function Nagivation() {
             <ul>
               <li className="list-group">
                 <img src={feedImage} alt="feed" />
-                <li>
-                  <NavLink to="/feeds">Feed</NavLink>
-                </li>
+                <p>Feed</p>
               </li>
               <li className="list-group">
                 <FontAwesomeIcon icon={faBookmark} />
-                <li>Bookmarks</li>
+                <p>Bookmarks</p>
               </li>
               <li className="list-group">
                 <FontAwesomeIcon icon={faUserGroup} />
-                <li>Team blogs</li>
+                <p> Team blogs</p>
               </li>
               <li className="list-group">
                 <FontAwesomeIcon icon={faEnvelopeOpen} />
-                <li>Drafts</li>
+                <p>Drafts</p>
               </li>
               <li className="list-group">
                 <img src={chartImage} alt="chart" />
-                <li>Analysis</li>
+                <p>Analysis</p>
               </li>
             </ul>
           </div>
@@ -98,19 +92,19 @@ export default function Nagivation() {
             <ul>
               <li className="list-group">
                 <FontAwesomeIcon icon={faUser} />
-                <li>Account</li>
+                <p> Account</p>
               </li>
               <li className="list-group">
                 <FontAwesomeIcon icon={faBell} />
-                <li>Notifications</li>
+                <p> Notifications</p>
               </li>
-              <li>
-                <li>Log Out</li>
-              </li>
+              <li>Log Out</li>
             </ul>
           </div>
         </div>
       </nav>
     </div>
   );
-}
+};
+
+export default Navigation;

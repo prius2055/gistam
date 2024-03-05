@@ -1,19 +1,19 @@
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Feeds from './pages/Feeds';
-import Navigation from './components/Nagivation';
+import Navigation from './components/Navigation';
 import Home from './pages/Home';
 import SignUp from './login/SignUp';
 import LogIn from './login/LogIn';
 import NewPost from './pages/NewPost';
-import Header from './components/Header';
+import PostAnalytics from './pages/PostDetail';
 
 import './App.css';
 
-function App() {
+const App: React.FC = () => {
   // const { posts } = useSelector((state) => state.post);
 
- 
   return (
     <div className="App">
       <Routes>
@@ -21,7 +21,8 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/feeds" element={<Feeds />} />
-        {/* <Route path="/feeds" element={<Navigation />} /> */}
+        <Route path="/post-analytics" element={<PostAnalytics />} />
+        <Route path="/new-post" element={<NewPost />} />
       </Routes>
 
       {/* <Header /> */}
@@ -34,12 +35,12 @@ function App() {
           <Routes>
             <Route path="/feeds" element={<Feeds />} />
             <Route path="/member" element={<Membership />} />
-            <Route path="/newpost" element={<NewPost />} />
+           
           </Routes>
         </div>
       </div> */}
     </div>
   );
-}
+};
 
 export default App;
