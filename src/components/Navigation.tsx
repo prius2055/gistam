@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../store/hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBookmark,
@@ -13,45 +13,33 @@ import feedImage from '../img/feed.png';
 import chartImage from '../img/chart.png';
 import './Navigation.css';
 
+// type CurrentUserDetails = {
+//   id: string;
+//   firstname: string;
+//   lastname: string;
+//   email: string;
+// };
+
+// type Props = {
+//   user: CurrentUserDetails;
+// };
+
 const Navigation: React.FC = () => {
-  // const { usersArray, isLoading, loadingError } = useSelector(
-  //   (store) => store.users
-  // );
-
-  // const loggedInUser = usersArray.filter(
-  //   (user) =>
-  //     user.email === currentUser.email && user.password === currentUser.password
-  // );
-
   return (
     <div className="navigation-group">
       <NavLink to="/" className="logo">
         CHATTER
       </NavLink>
 
-      {/* {usersArray?.map((user) => (
-        <nav className="navigation">
-          <ul className="navbar">
-            <li>
-              Welcome, <span>{user.firstname}</span>
-            </li>
-            <li>
-              <NavLink to="/newpost">Write a post</NavLink>
-            </li>
-          </ul>
-          <button type="button">Sign out</button>
-        </nav>
-      ))} */}
-
       <nav className="navigation">
         <div className="navbar">
           <div>
             <h3>Overview</h3>
             <ul>
-              <li className="list-group">
+              <NavLink to="/feeds" className="list-group">
                 <img src={feedImage} alt="feed" />
-                <p>Feed</p>
-              </li>
+                <p>Feeds</p>
+              </NavLink>
               <li className="list-group">
                 <FontAwesomeIcon icon={faBookmark} />
                 <p>Bookmarks</p>

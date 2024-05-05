@@ -1,29 +1,29 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const getUserConfirmationEmail = createAsyncThunk(
-  'user/confirm',
-  async (token) => {
-    const response = await axios.get(
-      `/confirmation?confirmation_token=${token}`
-    );
-    return response;
-  }
-);
+export const getCurrentUser = createAsyncThunk('user/current', async () => {
+  const authToken = localStorage.getItem('token');
+  const response = await axios.get('http://localhost:3001/currentuser', {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: authToken,
+    },
+  });
+  const user = await response.data;
+  return user;
+});
 
-interface UserState {
-  user: string;
+interface CurrentUserState {
+  currentUser: any;
   isLoading: boolean;
   loadingError: boolean;
-  confirmationMsg: any;
 }
 
 // Define the initial state using that type
-const initialState: UserState = {
-  user: '',
+const initialState: CurrentUserState = {
+  currentUser: '',
   isLoading: false,
   loadingError: false,
-  confirmationMsg: '',
 };
 
 const userSlice = createSlice({
@@ -31,12 +31,20 @@ const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(
-      getUserConfirmationEmail.fulfilled,
-      (state, { payload }) => {
-        state.confirmationMsg = payload;
-      }
-    );
+    builder
+      .addCase(getCurrentUser.pending, (state) => {
+        state.isLoading = true;
+        state.loadingError = false;
+      })
+      .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
+        state.currentUser = payload;
+        state.isLoading = false;
+        state.loadingError = false;
+      })
+      .addCase(getCurrentUser.rejected, (state) => {
+        state.loadingError = true;
+        state.isLoading = false;
+      });
   },
 });
 

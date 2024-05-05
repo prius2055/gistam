@@ -42,15 +42,17 @@ const LogIn: React.FC = () => {
           headers: {
             'Content-Type': 'application/json',
             accept: 'application/json',
-            // authorization: authToken,
           },
         }
       );
       const user = await response.data;
       const { status } = user;
+
       if (status.code === 200) {
+        const authorization = response.headers.authorization;
+        localStorage.setItem('token', authorization);
         setUiState({ ...uiState, showLoadingUi: false });
-        navigate('/feeds');
+        navigate('/', { state: status.data });
       }
     } catch (error) {
       if (error) {

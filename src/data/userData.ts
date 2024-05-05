@@ -17,3 +17,10 @@ export type UistateVariables = {
   showLoadingUi: boolean;
   showLoginErrorUi: boolean;
 };
+
+export interface CurrentUserDetails {
+  id: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+}

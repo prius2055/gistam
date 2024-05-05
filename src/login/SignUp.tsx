@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 // import { useDispatch } from 'react-redux';
-import { useAppDispatch } from '../store/hooks';
+
 // import { postUser } from '../store/userSlice';
 import { UserSignUpData, UistateVariables } from '../data/userData';
 import './Sign.css';
@@ -43,22 +43,23 @@ const SignUp: React.FC = () => {
     try {
       setUiState({ ...uiState, showLoadingUi: true });
       const userObject = { user: userInfo };
-      const authToken = localStorage.getItem('token');
       const response = await axios.post(
         'http://localhost:3001/signup',
         userObject,
         {
           headers: {
             'Content-Type': 'application/json',
-            authorization: authToken,
           },
         }
       );
       const user = await response.data;
       const { status } = user;
+      console.log(status);
       if (status.code === 200) {
+        const authorization = response.headers.authorization;
+        localStorage.setItem('token', authorization);
         setUiState({ ...uiState, showLoadingUi: false });
-        navigate('/feeds');
+        navigate('/');
       }
     } catch (error) {
       if (error) {
