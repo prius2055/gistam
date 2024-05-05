@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { FaPencil } from 'react-icons/fa6';
 import Post from './Post';
+import { NavLink } from 'react-router-dom';
 import './PostList.css';
 
 const PostList: React.FC = () => {
@@ -16,10 +17,10 @@ const PostList: React.FC = () => {
           <h2>FEED</h2>
           <p>Explore different content you'd love</p>
         </div>
-        <div className="feed-header-action">
+        <NavLink to="/new-post" className="feed-header-action">
           <FaPencil />
           <span>Post a content</span>
-        </div>
+        </NavLink>
       </div>
 
       <ul className="post-nav">

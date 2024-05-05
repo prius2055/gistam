@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
@@ -14,6 +15,8 @@
     "@types/node": "^20.11.20",
     "@types/react": "^18.2.58",
     "@types/react-dom": "^18.2.19",
+    "@types/react-redux": "^7.1.33",
+    "axios": "^1.6.7",
     "big.js": "^6.2.1",
     "firebase": "^9.23.0",
     "prop-types": "^15.8.1",

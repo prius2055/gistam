@@ -18,17 +18,36 @@
   width: 35%;
 }
 
-.profile {
-  margin-right: 4rem;
-}
-
 .search input {
   border: none;
   outline: none;
   padding: 1rem;
   font-size: 1.2rem;
+  width: 100%;
 }
 
 .header-icons {
   height: 1.5rem;
+}
+
+.profile {
+  margin-right: 1.5rem;
+}
+
+.profile img {
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+
+.header-buttons {
+  padding-right: 0;
+  margin-right: 0;
+}
+
+.header-buttons a {
+  margin-left: 1rem;
+  padding: 0.6rem 2rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  border: 1px solid #543ee0;
 }

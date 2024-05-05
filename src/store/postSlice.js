@@ -74,6 +74,6 @@ const postSlice = createSlice({
   },
 });
 
-export const { setUser, addNewUserToStorage, addNewPost, addNewPostToStorage } =
-  postSlice.actions;
+// export const { setUser, addNewUserToStorage, addNewPost, addNewPostToStorage } =
+//   postSlice.actions;
 export default postSlice.reducer;
