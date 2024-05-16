@@ -36,7 +36,7 @@ const PostAnalytics: React.FC = () => {
               <p>earned 2980 impressions</p>
             </div>
 
-            <Post />
+            {/* <Post /> */}
             <button>View post activity</button>
             <div>
               <h3>Posts summary</h3>

@@ -1,6 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-// import { addNewPost, addNewPostToStorage } from '../store/postSlice';
+import React, { FormEvent, useEffect, useRef, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faImage,
@@ -11,34 +10,34 @@ import {
 import PostList from '../components/PostList';
 
 import './NewPost.css';
-import { NavLink } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Navigation from '../components/Navigation';
-
-type NewPostObj = {
-  id: string;
-  topic: string;
-  content: string;
-  imageFile: object | string;
-  videoFile: object | string;
-  previewImageURL: string;
-  previewVideoURL: string;
-};
+import { postNewContent } from '../store/postSlice';
+import { NewPostObj, PostFileFormData } from '../data/postData';
 
 const NewPost: React.FC = () => {
+  const { currentUser, isLoading, loadingError } = useAppSelector(
+    (store) => store.users
+  );
+
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const [loadingState, setLoadingState] = useState(false);
   const [showOtherIcons, setShowOtherIcons] = useState(false);
-  const [newPost, setnewPost] = useState<NewPostObj>({
-    id: '',
+  const [formData, setFormData] = useState<NewPostObj>({
+    user_id: currentUser.id,
     topic: '',
     content: '',
-    imageFile: {},
-    videoFile: {},
-    previewImageURL: '',
-    previewVideoURL: '',
+    // author_name: authorName,
+    post_image: '',
+    // videoFile: {},
+    // previewImageURL: '',
+    // previewVideoURL: '',
   });
 
-  // const { posts } = useSelector((state) => state.post);
-  // const dispatch = useDispatch();
   const hiddenFileImageInput = useRef<HTMLInputElement | null>(null);
   const hiddenFileVideoInput = useRef<HTMLInputElement | null>(null);
 
@@ -49,50 +48,50 @@ const NewPost: React.FC = () => {
     hiddenFileImageInput.current?.click();
   };
 
-  const attachImageFunc = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
+  // const attachImageFunc = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   e.preventDefault();
+  //   const file = e.target.files?.[0].name;
+  //   console.log(typeof file);
 
-    const file = e.target.files?.[0];
+  //   if (file) {
+  //     setnewPost((prev) => ({
+  //       ...prev,
+  //       post_image: file,
+  //       // previewImageURL: URL.createObjectURL(file),
+  //     }));
+  //   } else {
+  //     // Handle case where no file is selected
+  //     setnewPost((prev) => ({
+  //       ...prev,
+  //       post_image: '', // Set a default value or handle as needed
+  //     }));
+  //   }
+  // };
 
-    if (file) {
-      setnewPost((prev) => ({
-        ...prev,
-        imageFile: file,
-        previewImageURL: URL.createObjectURL(file),
-      }));
-    } else {
-      // Handle case where no file is selected
-      setnewPost((prev) => ({
-        ...prev,
-        imageFile: '', // Set a default value or handle as needed
-      }));
-    }
-  };
+  // const attachVideoHandler = (e: React.FormEvent<EventTarget>) => {
+  //   e.preventDefault();
+  //   hiddenFileVideoInput.current?.click();
+  // };
 
-  const attachVideoHandler = (e: React.FormEvent<EventTarget>) => {
-    e.preventDefault();
-    hiddenFileVideoInput.current?.click();
-  };
+  // const attachVideoFunc = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   e.preventDefault();
 
-  const attachVideoFunc = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
+  //   const file = e.target.files?.[0];
 
-    const file = e.target.files?.[0];
-
-    if (file) {
-      setnewPost((prev) => ({
-        ...prev,
-        videoFile: file,
-        previewImageURL: URL.createObjectURL(file),
-      }));
-    } else {
-      // Handle case where no file is selected
-      setnewPost((prev) => ({
-        ...prev,
-        videoFile: '', // Set a default value or handle as needed
-      }));
-    }
-  };
+  //   if (file) {
+  //     setnewPost((prev) => ({
+  //       ...prev,
+  //       videoFile: file,
+  //       previewImageURL: URL.createObjectURL(file),
+  //     }));
+  //   } else {
+  //     // Handle case where no file is selected
+  //     setnewPost((prev) => ({
+  //       ...prev,
+  //       videoFile: '', // Set a default value or handle as needed
+  //     }));
+  //   }
+  // };
 
   const showOtherIconsHandler = () => {
     setShowOtherIcons(true);
@@ -102,25 +101,84 @@ const NewPost: React.FC = () => {
     setShowOtherIcons(false);
   };
 
-  const submitPostHandler = (e: React.FormEvent<EventTarget>) => {
-    e.preventDefault();
-    console.log(newPost);
-    // dispatch(addNewPost(newPost));
-    // dispatch(addNewPostToStorage(newPost));
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
 
-    setnewPost((prev) => ({
+  const handleImageInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+
+    if (files?.length) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        post_image: files,
+      }));
+    }
+  };
+
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoadingState(true);
+
+    const data = new FormData();
+
+    data.append('post[user_id]', formData.user_id);
+    // data.append('post[author_name]', formData.author_name);
+    data.append('post[topic]', formData.topic);
+    data.append('post[content]', formData.content);
+    data.append('post[post_image]', formData.post_image[0]);
+
+    console.log(formData);
+
+    const authToken = localStorage.getItem('token');
+
+    // console.log(authToken);
+    console.log(data);
+
+    fetch(`http://localhost:3001/api/v1/posts`, {
+      method: 'POST',
+      headers: {
+        authorization: `${authToken}`,
+      },
+      body: data,
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          setLoadingState(false);
+          navigate('/');
+        }
+      })
+      .catch((error) => {
+        console.log(`something went wrong ${error}`);
+      });
+
+    setFormData((prev) => ({
       ...prev,
       topic: '',
       content: '',
     }));
   };
 
+  if (loadingState) {
+    return <p>loading</p>;
+  }
+
+  if (!currentUser.firstname) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <div className="new-post">
       <Navigation />
       <div className="main-post-grp">
         <Header />
-        <form className="form" onSubmit={submitPostHandler}>
+        <form className="form" onSubmit={handleFormSubmit}>
           <button type="submit">Publish</button>
 
           <div className="form-group">
@@ -148,67 +206,63 @@ const NewPost: React.FC = () => {
                   <FontAwesomeIcon
                     icon={faVideo}
                     className="form-icon icon-video"
-                    onClick={attachVideoHandler}
+                    // onClick={attachVideoHandler}
                   />
                   <div className="form-attachments">
                     <input
+                      name="photo_image"
                       type="file"
                       accept="image/*"
-                      multiple
+                      // multiple
                       ref={hiddenFileImageInput}
-                      onChange={attachImageFunc}
+                      onChange={handleImageInputChange}
                     />
                     <input
                       type="file"
+                      name="video"
                       accept="video/*"
                       ref={hiddenFileVideoInput}
-                      onChange={attachVideoFunc}
                     />
                   </div>
                 </div>
               )}
 
               {!showOtherIcons && (
-                <input
-                  type="text"
-                  value={newPost.topic}
-                  placeholder="Title"
-                  onChange={(e) =>
-                    setnewPost((prev) => ({
-                      ...prev,
-                      topic: e.target.value,
-                      // id: loggedInUser[0].id,
-                    }))
-                  }
-                />
+                <label htmlFor="topic">
+                  <input
+                    id="topic"
+                    type="text"
+                    placeholder="Topic"
+                    name="topic"
+                    onChange={handleInputChange}
+                  />
+                </label>
               )}
             </div>
 
             <div className="hidden-inputs">
-              {newPost.previewImageURL && (
+              {/* {newPost.previewImageURL && (
                 <img
                   src={newPost.previewImageURL}
                   width="300px"
                   alt="Image preview"
                 />
-              )}
-              {newPost.previewVideoURL && (
+              )} */}
+              {/* {newPost.previewVideoURL && (
                 <video width="250" height="250" controls>
                   <source src={newPost.previewVideoURL} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
-              )}
-              <textarea
-                value={newPost.content}
-                className="text-area"
-                onChange={(e) =>
-                  setnewPost((prev) => ({
-                    ...prev,
-                    content: e.target.value,
-                  }))
-                }
-                placeholder="Write a post..."
-              ></textarea>
+              )} */}
+              <label htmlFor="content">
+                <textarea
+                  id="content"
+                  name="content"
+                  className="text-area"
+                  placeholder="Write a post..."
+                  onChange={handleInputChange}
+                ></textarea>
+              </label>
             </div>
           </div>
         </form>

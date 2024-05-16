@@ -24,6 +24,7 @@
   border-radius: 0.5rem;
   align-self: self-end;
   margin-bottom: 1rem;
+  cursor: pointer;
 }
 
 a {
@@ -67,7 +68,7 @@ a {
 
 .hidden-inputs img,
 .hidden-inputs video {
-margin-left: 6.5rem;
+  margin-left: 6.5rem;
 }
 
 .text-area {

@@ -11,27 +11,16 @@ import { PostObj } from '../data/postData';
 
 import './Post.css';
 
-type Props = {
-  post: PostObj;
-};
+const PostDetail: React.FC = () => {
+  // console.log()
+  //   const date = new Date(post.created_at);
+  // const day = post.created_at.getDate();
 
-const Post: React.FC<Props> = ({ post }) => {
-  console.log(post.user);
-
-  const { user } = post;
-
-  const firstname = user.firstname;
-  const lastname = user.lastname;
-
-  const authorName = firstname + ' ' + lastname;
-
-  const date = new Date(post.created_at);
-
-  const createdDate = date.toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
+  //   const createdDate = date.toLocaleDateString('en-GB', {
+  //     day: 'numeric',
+  //     month: 'long',
+  //     year: 'numeric',
+  //   });
 
   return (
     <div className="post">
@@ -39,19 +28,19 @@ const Post: React.FC<Props> = ({ post }) => {
         <div className="content-details">
           <CgProfile className="author-picture" />
           <div className="content-description">
-            <p>{authorName}</p>
+            {/* <p>{post.author_name}</p> */}
             <span>Product designer</span>
-            <span className="d-date">{createdDate}</span>
-            <span className="d-date">{date.toLocaleTimeString()}</span>
+            {/* <span className="d-date">{createdDate}</span> */}
+            {/* <span className="d-date">{date.toLocaleTimeString()}</span> */}
           </div>
         </div>
-        <h2>{post.topic}</h2>
+        {/* <h2>{post.topic}</h2> */}
         <div className="read-time">
           <VscBook />
           <span>10 mins read</span>
         </div>
-        <p>{post.content}</p>
-        <img src={post.post_image} alt="post image" className="post-hero" />
+        {/* <p>{post.content}</p> */}
+        {/* <img src={post.post_image} alt="post image" className="post-hero" /> */}
         <div className="post-icons">
           <div className="icon">
             <FaRegComments />
@@ -71,4 +60,4 @@ const Post: React.FC<Props> = ({ post }) => {
   );
 };
 
-export default Post;
+export default PostDetail;

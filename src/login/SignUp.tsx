@@ -24,7 +24,7 @@ const SignUp: React.FC = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    // image: '',
+    // avatar: '',
   });
 
   // const [authUser, setAuthUser] = useState(null);

@@ -1,14 +1,40 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from '../store/hooks';
 import { FaPencil } from 'react-icons/fa6';
 import Post from './Post';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import './PostList.css';
+import { getAllContent } from '../store/postSlice';
+import PostDetail from './PostDetail';
 
 const PostList: React.FC = () => {
-  // const { posts } = useSelector((store) => store.post);
+  const { currentUser } = useAppSelector((store) => store.users);
 
-  // const filteredPosts = posts.filter((post) => post.posts.length !== 0);
+  const { postsArray, isLoading, loadingError } = useAppSelector(
+    (store) => store.posts
+  );
+
+  const reversedPostsArray = [...postsArray].reverse();
+
+  // const array = [1, 2, 3, 4];
+  // array.reverse();
+
+  // console.log(array);
+  // [ 4, 3, 2, 1 ]
+
+  // const reversedPostArray = postsArray?.reverse();
+
+  console.log(reversedPostsArray);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getAllContent());
+  }, []);
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="post-list">
@@ -17,7 +43,10 @@ const PostList: React.FC = () => {
           <h2>FEED</h2>
           <p>Explore different content you'd love</p>
         </div>
-        <NavLink to="/new-post" className="feed-header-action">
+        <NavLink
+          to={currentUser.firstname ? '/new-post' : '/login'}
+          className="feed-header-action"
+        >
           <FaPencil />
           <span>Post a content</span>
         </NavLink>
@@ -29,7 +58,11 @@ const PostList: React.FC = () => {
         <li>Recent</li>
       </ul>
 
-      <Post />
+      {reversedPostsArray.map((post, i) => (
+        <Link to="/post-detail">
+          <Post post={post} key={i} />
+        </Link>
+      ))}
     </div>
   );
 };
