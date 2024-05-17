@@ -4,6 +4,7 @@ export interface UserSignUpData {
   email: string;
   password: string;
   confirmPassword?: string;
+  // avatar: string;
 }
 
 export interface UserLoginData {

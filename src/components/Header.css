@@ -31,12 +31,16 @@
 }
 
 .profile {
+  display: flex;
+  align-items: center;
   margin-right: 1.5rem;
 }
 
-.profile img {
-  margin-right: 1rem;
+.profile-image {
+  height: 2rem;
+  width: 2rem;
   margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .header-buttons {

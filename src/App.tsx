@@ -5,8 +5,9 @@ import Home from './pages/Home';
 import SignUp from './login/SignUp';
 import LogIn from './login/LogIn';
 import NewPost from './pages/NewPost';
-import PostAnalytics from './pages/PostDetail';
+import PostAnalytics from './pages/PostAnalytics';
 import ProtectedRoutes from './components/ProtectedRoutes';
+import PostDetail from './components/PostDetail';
 
 import './App.css';
 
@@ -14,15 +15,12 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/new-post" element={<NewPost />} />
+        <Route path="/posts" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />
-
-        <Route element={<ProtectedRoutes />}>
-          {/* <Route path="/new-post" element={<NewPost />} /> */}
-          <Route path="/post-analytics" element={<PostAnalytics />} />
-        </Route>
+        <Route path="/new-post" element={<NewPost />} />
+        <Route path="/post-analytics" element={<PostAnalytics />} />
+        <Route path="/posts/:postId" element={<PostDetail/>} />
       </Routes>
 
       {/* <Header /> */}

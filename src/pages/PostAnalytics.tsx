@@ -1,12 +1,11 @@
 import React from 'react';
-
-import Post from '../components/Post';
-import './PostDetail.css';
 import Nagivation from '../components/Navigation';
 import Header from '../components/Header';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { getCurrentUser } from '../store/userSlice';
+
+import './PostAnalytics.css';
 
 const PostAnalytics: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -36,7 +35,7 @@ const PostAnalytics: React.FC = () => {
               <p>earned 2980 impressions</p>
             </div>
 
-            <Post />
+            {/* <Post /> */}
             <button>View post activity</button>
             <div>
               <h3>Posts summary</h3>

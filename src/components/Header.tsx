@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
 import { useAppSelector } from '../store/hooks';
+import { CgProfile } from 'react-icons/cg';
 
 import './Header.css';
 import { NavLink } from 'react-router-dom';
@@ -32,7 +33,7 @@ const Header: React.FC = () => {
           )}
         </span>
 
-        {currentUser.firstname ? <img src="" alt="profile picture" /> : ''}
+        {currentUser.firstname ? <CgProfile className='profile-image' /> : ''}
         {currentUser.firstname ? (
           <FontAwesomeIcon icon={faBell} className="header-icons" />
         ) : (

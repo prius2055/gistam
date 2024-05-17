@@ -52,7 +52,7 @@ const LogIn: React.FC = () => {
         const authorization = response.headers.authorization;
         localStorage.setItem('token', authorization);
         setUiState({ ...uiState, showLoadingUi: false });
-        navigate('/', { state: status.data });
+        navigate('/posts', { state: status.data });
       }
     } catch (error) {
       if (error) {
