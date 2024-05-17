@@ -16,7 +16,6 @@ type Props = {
 };
 
 const Post: React.FC<Props> = ({ post }) => {
-  console.log(post.user);
 
   const { user } = post;
 

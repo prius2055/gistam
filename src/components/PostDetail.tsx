@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { VscBook } from 'react-icons/vsc';
 import { CgProfile } from 'react-icons/cg';
 import FeedHero from '../img/feed-hero.png';
@@ -6,13 +7,24 @@ import { FaRegComments } from 'react-icons/fa';
 import { FaRegHeart } from 'react-icons/fa';
 import { MdOutlineViewStream } from 'react-icons/md';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { getAllContent } from '../store/postSlice';
+import { getAllContent, getContent } from '../store/postSlice';
 import { PostObj } from '../data/postData';
 
 import './Post.css';
 
 const PostDetail: React.FC = () => {
-  // console.log()
+  const param = useParams();
+
+  const id = Number(param.postId);
+
+  console.log(id)
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getContent(id));
+  }, [id, dispatch]);
+
   //   const date = new Date(post.created_at);
   // const day = post.created_at.getDate();
 

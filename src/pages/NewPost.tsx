@@ -13,7 +13,6 @@ import './NewPost.css';
 import { Navigate, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Navigation from '../components/Navigation';
-import { postNewContent } from '../store/postSlice';
 import { NewPostObj, PostFileFormData } from '../data/postData';
 
 const NewPost: React.FC = () => {
@@ -41,7 +40,6 @@ const NewPost: React.FC = () => {
   const hiddenFileImageInput = useRef<HTMLInputElement | null>(null);
   const hiddenFileVideoInput = useRef<HTMLInputElement | null>(null);
 
-  // const loggedInUser = posts.filter((post) => post.loggedIn);
 
   const attachImageHandler = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
@@ -129,7 +127,6 @@ const NewPost: React.FC = () => {
     const data = new FormData();
 
     data.append('post[user_id]', formData.user_id);
-    // data.append('post[author_name]', formData.author_name);
     data.append('post[topic]', formData.topic);
     data.append('post[content]', formData.content);
     data.append('post[post_image]', formData.post_image[0]);
@@ -138,7 +135,6 @@ const NewPost: React.FC = () => {
 
     const authToken = localStorage.getItem('token');
 
-    // console.log(authToken);
     console.log(data);
 
     fetch(`http://localhost:3001/api/v1/posts`, {
@@ -151,7 +147,7 @@ const NewPost: React.FC = () => {
       .then((response) => {
         if (response.status === 200) {
           setLoadingState(false);
-          navigate('/');
+          navigate('/posts');
         }
       })
       .catch((error) => {
@@ -170,7 +166,7 @@ const NewPost: React.FC = () => {
   }
 
   if (!currentUser.firstname) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/posts" replace />;
   }
 
   return (

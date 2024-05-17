@@ -59,7 +59,7 @@ const SignUp: React.FC = () => {
         const authorization = response.headers.authorization;
         localStorage.setItem('token', authorization);
         setUiState({ ...uiState, showLoadingUi: false });
-        navigate('/');
+        navigate('/posts');
       }
     } catch (error) {
       if (error) {

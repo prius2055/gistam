@@ -3,9 +3,11 @@ import { useAppSelector, useAppDispatch } from '../store/hooks';
 import { FaPencil } from 'react-icons/fa6';
 import Post from './Post';
 import { NavLink, Link } from 'react-router-dom';
-import './PostList.css';
 import { getAllContent } from '../store/postSlice';
 import PostDetail from './PostDetail';
+import { PostObj } from '../data/postData';
+
+import './PostList.css';
 
 const PostList: React.FC = () => {
   const { currentUser } = useAppSelector((store) => store.users);
@@ -14,7 +16,7 @@ const PostList: React.FC = () => {
     (store) => store.posts
   );
 
-  const reversedPostsArray = [...postsArray].reverse();
+  const reversedPostsArray: PostObj[] = [...postsArray].reverse();
 
   // const array = [1, 2, 3, 4];
   // array.reverse();
@@ -30,7 +32,7 @@ const PostList: React.FC = () => {
 
   useEffect(() => {
     dispatch(getAllContent());
-  }, []);
+  }, [dispatch]);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -58,9 +60,9 @@ const PostList: React.FC = () => {
         <li>Recent</li>
       </ul>
 
-      {reversedPostsArray.map((post, i) => (
-        <Link to="/post-detail">
-          <Post post={post} key={i} />
+      {reversedPostsArray.map((post) => (
+        <Link to={`/posts/${post.id}`} key={post.id}>
+          <Post post={post} />
         </Link>
       ))}
     </div>

@@ -15,12 +15,12 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/posts" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/new-post" element={<NewPost />} />
         <Route path="/post-analytics" element={<PostAnalytics />} />
-        <Route path="/post-detail" element={<PostDetail/>} />
+        <Route path="/posts/:postId" element={<PostDetail/>} />
       </Routes>
 
       {/* <Header /> */}
