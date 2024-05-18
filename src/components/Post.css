@@ -20,4 +20,83 @@ a {
   border: 1px solid #ccc;
   padding-left: 1%;
   padding-top: 1%;
+  padding-right: 1%;
+}
+
+.post-detail {
+  display: flex;
+}
+
+.post-detail-content {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  padding: 1%;
+  width: 100%;
+}
+
+.d-time {
+  margin-left: 5%;
+}
+
+.content-description {
+  margin-left: 1.5%;
+  width: 15%;
+}
+
+.post-detail {
+  padding-top: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.comments {
+  margin-top: 1%;
+}
+
+.comment {
+  margin-top: 0.5%;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  padding: 1%;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+    rgb(209, 213, 219) 0px 0px 0px 1px inset;
+}
+
+.commenter {
+  text-align: right;
+}
+
+.comment-date {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.comment-btn {
+  padding: 10px 12px;
+  color: white;
+  background-color: #543ee0;
+  border: 1px solid #543ee0;
+  margin-top: 2%;
+  cursor: pointer;
+}
+
+.comment-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-form-text {
+  width: 100%;
+}
+
+.comment-form-submit-btn {
+  padding: 10px 12px;
+  color: white;
+  background-color: #543ee0;
+  border: 1px solid #543ee0;
+  margin-top: 1%;
+  cursor: pointer;
+  align-self: flex-end;
 }

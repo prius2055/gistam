@@ -17,16 +17,7 @@ const PostList: React.FC = () => {
   );
 
   const reversedPostsArray: PostObj[] = [...postsArray].reverse();
-
-  // const array = [1, 2, 3, 4];
-  // array.reverse();
-
-  // console.log(array);
-  // [ 4, 3, 2, 1 ]
-
-  // const reversedPostArray = postsArray?.reverse();
-
-  console.log(reversedPostsArray);
+ 
 
   const dispatch = useAppDispatch();
 
