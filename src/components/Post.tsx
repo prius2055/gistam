@@ -16,11 +16,10 @@ type Props = {
 };
 
 const Post: React.FC<Props> = ({ post }) => {
+  const { posterDetail, comments } = post;
 
-  const { user } = post;
-
-  const firstname = user.firstname;
-  const lastname = user.lastname;
+  const firstname = posterDetail.firstname;
+  const lastname = posterDetail.lastname;
 
   const authorName = firstname + ' ' + lastname;
 
@@ -39,9 +38,8 @@ const Post: React.FC<Props> = ({ post }) => {
           <CgProfile className="author-picture" />
           <div className="content-description">
             <p>{authorName}</p>
-            <span>Product designer</span>
-            <span className="d-date">{createdDate}</span>
-            <span className="d-date">{date.toLocaleTimeString()}</span>
+            <span>{createdDate}</span>
+            <span className="d-time">{date.toLocaleTimeString()}</span>
           </div>
         </div>
         <h2>{post.topic}</h2>
@@ -50,11 +48,11 @@ const Post: React.FC<Props> = ({ post }) => {
           <span>10 mins read</span>
         </div>
         <p>{post.content}</p>
-        <img src={post.post_image} alt="post image" className="post-hero" />
+        <img src={post.post_image_url} alt="post image" className="post-hero" />
         <div className="post-icons">
           <div className="icon">
             <FaRegComments />
-            <p>200</p>
+            <p>{post.comments.length}</p>
           </div>
           <div className="icon">
             <FaRegHeart />

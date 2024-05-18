@@ -1,3 +1,4 @@
+import { CommentType } from './commentData';
 import { CurrentUserDetails } from './userData';
 
 export type NewPostObj = {
@@ -19,9 +20,9 @@ export type PostObj = {
   topic: string;
   content: string;
   created_at: string;
-  post_image: string;
-  user: CurrentUserDetails;
-  // videoFile: object | string;
+  post_image_url: string;
+  posterDetail: CurrentUserDetails;
+  comments: CommentType[];
   // previewImageURL: string;
   // previewVideoURL: string;
 };
@@ -31,6 +32,5 @@ export interface PostFileFormData {
   author_name: string;
   topic: string;
   content: string;
-  // post_image: string | Blob;
   post_image: File;
 }

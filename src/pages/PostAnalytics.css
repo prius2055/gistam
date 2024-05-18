@@ -2,11 +2,6 @@
   display: flex;
 }
 
-.post-detail {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
 .post-highlight {
   border-top: 4px solid #7664e6;
   border-bottom: 4px solid #7664e6;
