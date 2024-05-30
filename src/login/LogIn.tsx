@@ -34,14 +34,12 @@ const LogIn: React.FC = () => {
     try {
       setUiState({ ...uiState, showLoadingUi: true });
       const userObj = { user: userLogin };
-      // const authToken = localStorage.getItem('token');
       const response = await axios.post(
         'http://localhost:3001/login',
         userObj,
         {
           headers: {
             'Content-Type': 'application/json',
-            accept: 'application/json',
           },
         }
       );
@@ -52,7 +50,7 @@ const LogIn: React.FC = () => {
         const authorization = response.headers.authorization;
         localStorage.setItem('token', authorization);
         setUiState({ ...uiState, showLoadingUi: false });
-        navigate('/posts', { state: status.data });
+        navigate('/posts');
       }
     } catch (error) {
       if (error) {
@@ -101,7 +99,7 @@ const LogIn: React.FC = () => {
       <div className="sign-in">
         <div className="sign-in-hero">
           <p className="chatter">CHATTER</p>
-          <p>
+          <p className='sign-in-hero-intro'>
             Unleash the Power of Words, Connect with Like-minded Readers and
             Writers
           </p>

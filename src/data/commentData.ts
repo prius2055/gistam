@@ -1,5 +1,5 @@
 export type Comment = {
-  user_id: number;
+  user_id: number | null;
   post_id: number;
   text: string;
 };
@@ -18,3 +18,9 @@ export type CommentType = {
   commenterDetail: CommenterUserDetail;
   created_at: string;
 };
+
+export interface CommentDeleteData {
+  userId: number | null;
+  postId: number;
+  commentId: number | null;
+}

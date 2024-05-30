@@ -1,16 +1,13 @@
-.feeds {
-  display: flex;
-  width: 100%;
+.home {
+  max-width: 80%;
+  margin: 0 auto;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  background-color: white;
 }
 
-.feed-group {
-  width: 100%;
+@media screen and (max-width: 960px) {
+  .home {
+    max-width: 100%;
+  }
 }
-
-.feed button {
-  padding: 1rem 2rem;
-  margin-top: 1rem;
-  margin-left: 10rem;
-}
-
-

@@ -1,4 +1,5 @@
 import { CommentType } from './commentData';
+import { LikeType } from './likeData';
 import { CurrentUserDetails } from './userData';
 
 export type NewPostObj = {
@@ -23,6 +24,7 @@ export type PostObj = {
   post_image_url: string;
   posterDetail: CurrentUserDetails;
   comments: CommentType[];
+  likes: LikeType[];
   // previewImageURL: string;
   // previewVideoURL: string;
 };
@@ -33,4 +35,9 @@ export interface PostFileFormData {
   topic: string;
   content: string;
   post_image: File;
+}
+
+export interface PostDeleteData {
+  userId: number;
+  postId: number;
 }

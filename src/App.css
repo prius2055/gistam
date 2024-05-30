@@ -1,16 +1,5 @@
 .App {
-  height: 100vh;
   position: relative;
+  background-color: whitesmoke;
+  min-height: 100vh;
 }
-
-/* .app {
-  width: 100%;
-}
-
-.pages {
-  width: 95%;
-  border: 1px #ccc solid;
-  margin-left: 1.5rem;
-  margin-top: 2rem;
-  height: 100%;
-} */

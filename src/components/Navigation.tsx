@@ -1,6 +1,6 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useAppSelector } from '../store/hooks';
+import React, { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBookmark,
@@ -12,23 +12,74 @@ import { faUserGroup, faArrowTrendUp } from '@fortawesome/free-solid-svg-icons';
 import feedImage from '../img/feed.png';
 import chartImage from '../img/chart.png';
 import './Navigation.css';
-
-// type CurrentUserDetails = {
-//   id: string;
-//   firstname: string;
-//   lastname: string;
-//   email: string;
-// };
-
-// type Props = {
-//   user: CurrentUserDetails;
-// };
+import axios from 'axios';
+import { clearCurrentUser } from '../store/userSlice';
 
 const Navigation: React.FC = () => {
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch()
+
+  // const logout = async () => {
+  //   setLoading(true);
+  //   const authToken = localStorage.getItem('token');
+
+  //   try {
+  //     const response = await axios.delete('http://localhost:3001/logout', {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Authorization: authToken,
+  //       },
+  //     });
+  //     const user = await response.data;
+  //     const { status } = user;
+
+  //     console.log(status);
+
+  //     if (status === 200) {
+  //       setLoading(false);
+  //       navigate('/', { state: status.data });
+  //     }
+  //   } catch (error) {}
+  // };
+
+  const handleLogout = async (e: React.FormEvent<EventTarget>) => {
+    e.preventDefault();
+    setLoading(true);
+    const authToken = localStorage.getItem('token');
+
+    try {
+      const response = await axios.delete('http://localhost:3001/logout', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: authToken,
+        },
+      });
+      const user = await response.data;
+      const { status } = user;
+
+      console.log(status);
+
+      if (status === 200) {
+        setLoading(false);
+        dispatch(clearCurrentUser())
+        localStorage.removeItem('token');
+        navigate('/');
+      }
+    } catch (error) {
+       setLoading(false);
+    }
+
+  };
+
+  if (loading) {
+    return <p>loading...</p>;
+  }
+
   return (
     <div className="navigation-group">
-      <NavLink to="/" className="logo">
-        CHATTER
+      <NavLink to="/posts" className="logo">
+        GISTAM
       </NavLink>
 
       <nav className="navigation">
@@ -36,9 +87,9 @@ const Navigation: React.FC = () => {
           <div>
             <h3>Overview</h3>
             <ul>
-              <NavLink to="/feeds" className="list-group">
+              <NavLink to="/posts" className="list-group">
                 <img src={feedImage} alt="feed" />
-                <p>Feeds</p>
+                <p>Posts</p>
               </NavLink>
               <li className="list-group">
                 <FontAwesomeIcon icon={faBookmark} />
@@ -60,9 +111,8 @@ const Navigation: React.FC = () => {
           </div>
 
           <div>
-            {/* <NavLink to="/member">Become a member</NavLink> */}
             <NavLink to="/member" className="trending">
-              <h3>Trending Tags</h3>
+              <h3>Trending</h3>
               <FontAwesomeIcon icon={faArrowTrendUp} />
             </NavLink>
 
@@ -86,7 +136,9 @@ const Navigation: React.FC = () => {
                 <FontAwesomeIcon icon={faBell} />
                 <p> Notifications</p>
               </li>
-              <li>Log Out</li>
+              <form onSubmit={handleLogout}>
+                <button type="submit">Log Out</button>
+              </form>
             </ul>
           </div>
         </div>

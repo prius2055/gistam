@@ -27,10 +27,6 @@ const SignUp: React.FC = () => {
     // avatar: '',
   });
 
-  // const [authUser, setAuthUser] = useState(null);
-
-  // const dispatch = useAppDispatch();
-
   const showLoginForm = () => {
     setUiState({ ...uiState, showLoginUi: true, showSignupUi: false });
   };
@@ -113,7 +109,7 @@ const SignUp: React.FC = () => {
       <div className="sign-in">
         <div className="sign-in-hero">
           <p className="chatter">CHATTER</p>
-          <p>
+          <p className='sign-in-hero-intro'>
             Unleash the Power of Words, Connect with Like-minded Readers and
             Writers
           </p>
@@ -135,7 +131,7 @@ const SignUp: React.FC = () => {
             </NavLink>
           </div>
           <div className="sign-in-form-area">
-            <h2>Register as a writer/reader</h2>
+            <h2>Register to stay informed</h2>
 
             <form onSubmit={logInHandler}>
               <div className="name-field">
@@ -167,18 +163,6 @@ const SignUp: React.FC = () => {
                   />
                 </label>
               </div>
-
-              <label>
-                You are joining as?
-                <select
-                  onChange={(e) => {
-                    setUserLogIn((prev) => ({ ...prev, role: e.target.value }));
-                  }}
-                >
-                  <option>Writer</option>
-                  <option>Reader</option>
-                </select>
-              </label>
               <label>
                 Email address
                 <input

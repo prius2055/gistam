@@ -3,34 +3,43 @@ a {
   margin-top: 1rem;
 }
 
-.post {
-  margin-bottom: 1rem;
-}
-
 .author-picture {
   height: 5rem;
   width: 5rem;
 }
 
-.post-hero {
+.post img {
+  width: 30%;
+  height: 20rem;
+  border-radius: 0.5rem;
+}
+
+.post-detail-container {
+  display: flex;
+  background-color: white;
+  border: 1px solid #ccc;
+}
+
+.post-detail {
+  width: 100%;
+}
+
+.post-detail-content img {
+  width: 30%;
+  height: 20rem;
   border-radius: 0.5rem;
 }
 
 .post-content {
-  border: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
   padding-left: 1%;
   padding-top: 1%;
   padding-right: 1%;
 }
 
-.post-detail {
-  display: flex;
-}
-
 .post-detail-content {
   display: flex;
   flex-direction: column;
-  border: 1px solid #ccc;
   padding: 1%;
   width: 100%;
 }
@@ -39,15 +48,22 @@ a {
   margin-left: 5%;
 }
 
-.content-description {
-  margin-left: 1.5%;
-  width: 15%;
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1%;
 }
 
-.post-detail {
-  padding-top: 1rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+.content-details {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1%;
+}
+
+.content-description {
+  margin-left: 5%;
+  width: 100%;
 }
 
 .comments {
@@ -55,6 +71,8 @@ a {
 }
 
 .comment {
+  display: flex;
+  justify-content: space-between;
   margin-top: 0.5%;
   background-color: whitesmoke;
   border-radius: 10px;
@@ -64,7 +82,13 @@ a {
 }
 
 .commenter {
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
+  width: 20%;
+}
+
+.commenter-details {
+  width: 100%;
 }
 
 .comment-date {
@@ -91,6 +115,14 @@ a {
   width: 100%;
 }
 
+.comment-form-subbtn-grp {
+  width: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-self: flex-end;
+  margin-top: 1%;
+}
+
 .comment-form-submit-btn {
   padding: 10px 12px;
   color: white;
@@ -99,4 +131,87 @@ a {
   margin-top: 1%;
   cursor: pointer;
   align-self: flex-end;
+}
+
+.icon-grp {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.icon-grp p {
+  margin-left: 5px;
+}
+
+.likes {
+  align-self: flex-end;
+}
+
+.like-btn {
+  border: none;
+  cursor: pointer;
+}
+
+.like-comment-headings {
+  display: flex;
+  justify-content: space-between;
+}
+
+.likes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.likes h4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.like-poster-detail {
+  list-style: none;
+  color: #543ee0;
+  font-style: italic;
+  margin-right: 0.5rem;
+}
+
+.post-topic {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 960px) {
+  .post-content {
+    padding-left: 3%;
+    padding-right: 3%;
+  }
+
+  .post img {
+    width: 100%;
+  }
+
+  .post-detail-content img {
+    width: 100%;
+  }
+
+  .commenter {
+    width: 40%;
+  }
+
+  .comment-form-subbtn-grp {
+    width: 20%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .commenter {
+    width: 50%;
+  }
+
+  .comment-form-subbtn-grp {
+    width: 25%;
+  }
 }

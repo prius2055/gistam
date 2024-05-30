@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { getCurrentUser } from '../store/userSlice';
 
-import './PostAnalytics.css';
+// import './PostAnalytics.css';
 
 const PostAnalytics: React.FC = () => {
   const dispatch = useAppDispatch();
