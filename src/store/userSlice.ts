@@ -4,26 +4,20 @@ import { CurrentUserDetails } from '../data/userData';
 
 export const getCurrentUser = createAsyncThunk('user/current', async () => {
   const authToken = localStorage.getItem('token');
-  const response = await axios.get('http://localhost:3001/currentuser', {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: authToken,
-    },
-  });
+  const response = await axios.get(
+    'https://chatterapp-backend.onrender.com/currentuser',
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: authToken,
+      },
+    }
+  );
   const user = await response.data;
   return user;
 });
 
-// export const deleteUser = createAsyncThunk('delete/user', async () => {
-//   const response = await axios.delete('http://localhost:3001/logout', {
-//     headers: {
-//       'Content-Type': 'application/json',
-//       Authorization: authToken,
-//     },
-//   });
-//   const user = await response.data;
-//   return user;
-// });
+
 
 interface CurrentUserState {
   currentUser: CurrentUserDetails;

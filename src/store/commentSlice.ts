@@ -7,7 +7,7 @@ export const postComment = createAsyncThunk(
   async (commentObj: Comment) => {
     const authToken = localStorage.getItem('token');
     const response = await axios.post(
-      `http://localhost:3001/api/v1/users/${commentObj.user_id}/posts/${commentObj.post_id}/comments`,
+      `https://chatterapp-backend.onrender.com/api/v1/users/${commentObj.user_id}/posts/${commentObj.post_id}/comments`,
       { comment: commentObj },
 
       {
@@ -26,7 +26,7 @@ export const deleteComment = createAsyncThunk(
   async (details: CommentDeleteData) => {
     const authToken = localStorage.getItem('token');
     const response = await axios.delete(
-      `http://localhost:3001/api/v1/users/${details.userId}/posts/${details.postId}/comments/${details.commentId}`,
+      `https://chatterapp-backend.onrender.com/api/v1/users/${details.userId}/posts/${details.postId}/comments/${details.commentId}`,
 
       {
         headers: {
