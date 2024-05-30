@@ -5,7 +5,6 @@
   padding-top: 0.5rem;
   padding-bottom: 0.8rem;
   border-bottom: 1px #ccc solid;
-  width: 100%;
 }
 
 .search {
@@ -54,4 +53,14 @@
   border-radius: 0.3rem;
   cursor: pointer;
   border: 1px solid #543ee0;
+}
+
+@media screen and (max-width: 960px) {
+  .header {
+    padding-top: 0.8rem;
+  }
+
+  .search {
+    margin-left: 2rem;
+  }
 }

@@ -26,13 +26,14 @@
 
 .sign-in {
   display: flex;
-  width: 60rem;
-  height: 45rem;
+  width: 50%;
+  /* height: 62%; */
   position: absolute;
-  top: 12rem;
-  left: 30rem;
+  top: 50%;
+  left: 50%;
   z-index: 10;
   background-color: white;
+  transform: translate(-50%, -50%);
 }
 
 .sign-in-hero {
@@ -56,6 +57,7 @@
 .sign-in-form {
   padding: 1rem 3rem 1rem 5rem;
   border: 1px #ccc solid;
+  width: 55%;
 }
 
 .sign-in-form-nav {
@@ -91,7 +93,7 @@
 .sign-in-form-area {
   border: none;
   margin-top: 1.2rem;
-  width: 25rem;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -145,4 +147,27 @@
 .account-btn {
   background: #543ee0;
   color: white;
+}
+
+@media screen and (max-width: 960px) {
+  .sign-in {
+    width: 80%;
+  }
+
+  .name-field {
+    justify-content: space-between;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .sign-in-form {
+    padding: 1rem;
+  }
+  .sign-in-form-area h2 {
+  margin-bottom: 5%;
+  }
+  .sign-in-hero-intro {
+  font-size: 1rem;
+  }
 }

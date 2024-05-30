@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { Comment } from '../data/commentData';
+import { Comment, CommentDeleteData } from '../data/commentData';
 
 export const postComment = createAsyncThunk(
   'post/comment',
@@ -17,91 +17,41 @@ export const postComment = createAsyncThunk(
         },
       }
     );
-    const comments = await response.data;
-    // return post;
-    console.log(comments);
+    const comment = await response.data;
   }
 );
 
-// export const getAllContent = createAsyncThunk('get/all-content', async () => {
-//   const response = await axios.get(
-//     `http://localhost:3001/api/v1/posts`,
+export const deleteComment = createAsyncThunk(
+  'delete/comment',
+  async (details: CommentDeleteData) => {
+    const authToken = localStorage.getItem('token');
+    const response = await axios.delete(
+      `http://localhost:3001/api/v1/users/${details.userId}/posts/${details.postId}/comments/${details.commentId}`,
 
-//     {
-//       headers: {
-//         'content-type': 'application/json',
-//       },
-//     }
-//   );
-//   const posts = await response.data;
-//   return posts;
-// });
+      {
+        headers: {
+          'content-type': 'application/json',
+          Authorization: authToken,
+        },
+      }
+    );
+    const post = await response.data;
+    return post;
+  }
+);
 
-// export const getContent = createAsyncThunk(
-//   'get/content',
-//   async (postId: number) => {
-//     const response = await axios.get(
-//       `http://localhost:3001/api/v1/posts/${postId}`,
-
-//       {
-//         headers: {
-//           'content-type': 'application/json',
-//         },
-//       }
-//     );
-//     const post = await response.data;
-//     return post;
-//   }
-// );
-
-// interface PostsState {
-//   postsArray: PostObj[];
-//   post: PostObj | null;
-//   isLoading: boolean;
-//   loadingError: boolean;
-// }
 
 const initialState = {
-  postsArray: [],
-  post: null,
+  commentsArray: [],
   isLoading: false,
   loadingError: false,
 };
 
 const commentSlice = createSlice({
-  name: 'post',
+  name: 'comment',
   initialState,
   reducers: {},
 
-  //   extraReducers: (builder) => {
-  //     builder
-  //       .addCase(getAllContent.pending, (state) => {
-  //         state.isLoading = true;
-  //         state.loadingError = false;
-  //       })
-  //       .addCase(getAllContent.fulfilled, (state, { payload }) => {
-  //         state.postsArray = payload;
-  //         state.isLoading = false;
-  //         state.loadingError = false;
-  //       })
-  //       .addCase(getAllContent.rejected, (state) => {
-  //         state.loadingError = true;
-  //         state.isLoading = false;
-  //       })
-  //       .addCase(getContent.pending, (state) => {
-  //         state.isLoading = true;
-  //         state.loadingError = false;
-  //       })
-  //       .addCase(getContent.fulfilled, (state, { payload }) => {
-  //         state.post = payload;
-  //         state.isLoading = false;
-  //         state.loadingError = false;
-  //       })
-  //       .addCase(getContent.rejected, (state) => {
-  //         state.loadingError = true;
-  //         state.isLoading = false;
-  //       });
-  //   },
 });
 
 export default commentSlice.reducer;

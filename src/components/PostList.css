@@ -1,8 +1,13 @@
+.post-list-container {
+  display: flex;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  background-color: white;
+}
+
 .post-list {
-  border-bottom: none;
+  width: 100%;
   margin-top: 1rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
 }
 
 .post-header {
@@ -11,6 +16,8 @@
   padding-top: 1%;
   padding-bottom: 1%;
   align-items: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .feed-header-action {
@@ -37,12 +44,6 @@
   list-style: none;
 }
 
-.content-details {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1%;
-}
-
 .content-details img {
   border-radius: 50%;
 }
@@ -50,10 +51,8 @@
 .content-details p {
   font-size: 16px;
   font-weight: 700;
-  margin-bottom: 5%;
+  margin-bottom: 1%;
 }
-
-
 
 .read-time {
   display: flex;
@@ -79,13 +78,26 @@
 .post-icons {
   display: flex;
   justify-content: space-between;
+  border: 1px solid whitesmoke;
+  background-color: whitesmoke;
+  margin-bottom: 2rem;
+  padding: 0.5rem 1rem;
 }
 
-.icon {
-  display: flex;
-  align-items: center;
+.delete-btn {
+  align-self: right;
+  border: none;
+  background-color: transparent;
 }
 
-.icon p {
-  margin-left: 5px;
+.delete-icon {
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
 }
+
+.delete-icon:hover {
+  fill: white;
+  background-color: red;
+}
+

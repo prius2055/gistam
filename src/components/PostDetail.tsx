@@ -8,26 +8,34 @@ import { FaRegHeart } from 'react-icons/fa';
 import { MdOutlineViewStream } from 'react-icons/md';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { getAllContent, getContent } from '../store/postSlice';
-import { postComment } from '../store/commentSlice';
-import { PostObj } from '../data/postData';
+import { postComment, deleteComment } from '../store/commentSlice';
+import { AiOutlineDelete } from 'react-icons/ai';
 
 import './Post.css';
-import { CommentType } from '../data/commentData';
+import { Comment, CommentType } from '../data/commentData';
 import { getCurrentUser } from '../store/userSlice';
 import Header from './Header';
 import Navigation from './Navigation';
+import { LikeType, NewLikeObj } from '../data/likeData';
+import { postLike, deleteLike } from '../store/likeSlice';
 
 const PostDetail: React.FC = () => {
   const { currentUser } = useAppSelector((store) => store.users);
+
+  const user = currentUser
 
   const { post, isLoading, loadingError } = useAppSelector(
     (store) => store.posts
   );
 
-  console.log(post);
+  const [likeObj, setLikeObj] = useState<NewLikeObj>({
+    user_id: 1,
+    post_id: 1,
+  });
+  const [likeBtnState, setLikeBtnState] = useState({ btnState: false });
 
   const [showCommentBox, setShowCommentBox] = useState(false);
-  const [newComment, setNewComment] = useState({
+  const [newComment, setNewComment] = useState<Comment>({
     user_id: 1,
     post_id: 1,
     text: '',
@@ -39,21 +47,35 @@ const PostDetail: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // dispatch(getCurrentUser());
+    dispatch(getCurrentUser());
+
     dispatch(getContent(postId));
-  }, [dispatch]);
+    if (likeBtnState.btnState) {
+      dispatch(postLike(likeObj));
+    } else {
+      dispatch(deleteLike(likeObj));
+    }
+  }, [dispatch, likeBtnState.btnState]);
 
   if (!post) {
     return <p>Post not found</p>;
   }
 
-  const { topic, content, post_image_url, posterDetail, created_at, comments } =
-    post;
+  const {
+    topic,
+    content,
+    post_image_url,
+    posterDetail,
+    created_at,
+    comments,
+    likes,
+  } = post;
 
   const { firstname, lastname, id } = posterDetail;
   const authorName = firstname + ' ' + lastname;
 
   const commentsArray: CommentType[] = [...comments];
+  const likesArray: LikeType[] = [...likes];
 
   const date = new Date(created_at);
   const createdDate = date.toLocaleDateString('en-GB', {
@@ -66,7 +88,7 @@ const PostDetail: React.FC = () => {
     e.preventDefault();
 
     if (currentUser?.firstname) {
-      setShowCommentBox(!showCommentBox);
+      setShowCommentBox(true);
     } else {
       navigate('/login');
     }
@@ -83,6 +105,23 @@ const PostDetail: React.FC = () => {
     dispatch(getContent(postId));
   };
 
+  const commentDeleteHandler = (
+    commentId: number | null,
+    userId: number | null,
+    postId: number
+  ) => {
+    const commentDeleteDetail = {
+      commentId,
+      userId,
+      postId,
+    };
+    dispatch(deleteComment(commentDeleteDetail)).then((response) => {
+      if (response.payload.status) {
+        dispatch(getContent(postId));
+      }
+    });
+  };
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -92,11 +131,11 @@ const PostDetail: React.FC = () => {
   }
 
   return (
-    <div>
-      <Header />
-      <div className="post-detail">
-        {currentUser && <Navigation />}
+    <div className="post-detail-container">
+      {currentUser && <Navigation />}
 
+      <div className="post-detail">
+        <Header />
         <div className="post-detail-content">
           <div className="content-details">
             <CgProfile className="author-picture" />
@@ -117,28 +156,98 @@ const PostDetail: React.FC = () => {
           <img src={post_image_url} alt="post image" className="post-hero" />
 
           <div className="comments">
-            <h4>Comments ({commentsArray.length})</h4>
+            <div className="like-comment-headings">
+              <h4>Comments ({commentsArray.length})</h4>
+              <div className="likes">
+                <form
+                  onSubmit={(e: React.FormEvent<EventTarget>) => {
+                    e.preventDefault();
+
+                    if (currentUser?.firstname) {
+                      setLikeObj({ ...likeObj, post_id: postId });
+                      setLikeBtnState((prev) => ({
+                        ...prev,
+                        btnState: !prev.btnState,
+                      }));
+                    } else {
+                      navigate('/login');
+                    }
+                  }}
+                >
+                  <button type="submit" className="like-btn">
+                    <FaRegHeart
+                      className="icon"
+                      style={{
+                        backgroundColor: `${
+                          likeBtnState.btnState ? 'red' : 'white'
+                        }`,
+                        fill: `${likeBtnState.btnState ? 'white' : ''}`,
+                        cursor: 'pointer',
+                      }}
+                    />
+                  </button>
+                </form>
+
+                <h4>Likes({likesArray.length})</h4>
+                {likesArray.map((like) => (
+                  <ul className="like-poster-detail" key={like.id}>
+                    {like.user_id === currentUser?.id ? (
+                      <li>You,</li>
+                    ) : (
+                      <li>{like.likerDetail.firstname},</li>
+                    )}
+                  </ul>
+                ))}
+
+                <span>
+                  {likesArray.length === 0
+                    ? ''
+                    : likesArray.length === 1
+                    ? 'likes this post'
+                    : 'like this post'}
+                </span>
+              </div>
+            </div>
+
             {commentsArray.map((comment) => (
-              <div className="comment">
+              <div className="comment" key={comment.id}>
                 <p className="post-comments">{comment.text}</p>
-
                 <div className="commenter">
-                  <span>
-                    {comment.commenterDetail.firstname +
-                      ' ' +
-                      comment.commenterDetail.lastname}
-                  </span>
+                  <div className="commenter-details">
+                    <span>
+                      {comment.commenterDetail.firstname +
+                        ' ' +
+                        comment.commenterDetail.lastname}
+                    </span>
 
-                  <span className="comment-date">
-                    {new Date(
-                      Date.parse(comment.created_at)
-                    ).toLocaleDateString()}
-                  </span>
-                  <span>
-                    {new Date(
-                      Date.parse(comment.created_at)
-                    ).toLocaleTimeString()}
-                  </span>
+                    <span className="comment-date">
+                      {new Date(
+                        Date.parse(comment.created_at)
+                      ).toLocaleDateString()}
+                    </span>
+                    <span>
+                      {new Date(
+                        Date.parse(comment.created_at)
+                      ).toLocaleTimeString()}
+                    </span>
+                  </div>
+
+                  {currentUser?.id === comment.user_id && (
+                    <form
+                      onSubmit={(e: React.FormEvent<EventTarget>) => {
+                        e.preventDefault();
+                        commentDeleteHandler(
+                          comment.id,
+                          currentUser.id,
+                          comment.post_id
+                        );
+                      }}
+                    >
+                      <button type="submit" className="delete-btn">
+                        <AiOutlineDelete className="delete-icon" />
+                      </button>
+                    </form>
+                  )}
                 </div>
               </div>
             ))}
@@ -158,9 +267,20 @@ const PostDetail: React.FC = () => {
                   });
                 }}
               ></textarea>
-              <button type="submit" className="comment-form-submit-btn">
-                Submit
-              </button>
+              <div className="comment-form-subbtn-grp">
+                <button type="submit" className="comment-form-submit-btn">
+                  Submit
+                </button>
+                <button
+                  type="button"
+                  className="comment-form-submit-btn"
+                  onClick={() => {
+                    setShowCommentBox(false);
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
             </form>
           )}
           {!showCommentBox && (

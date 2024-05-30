@@ -14,9 +14,6 @@
   border-right: 1px #ccc solid;
   position: sticky;
   top: 0;
-
-  /* margin-bottom: 20px; */
-  /* box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px; */
 }
 
 .logo {
@@ -73,7 +70,7 @@
 
 .navbar ul {
   padding-left: 1.2rem;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
 a {
@@ -83,7 +80,15 @@ a {
 
 .navbar a.active {
   color: black;
-  border-bottom: 2px solid red;
+  border-bottom: 2px solid #543ee0;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
+  padding-bottom: 1rem;
+}
+
+@media screen and (max-width: 640px) {
+  .navigation-group {
+    width: 30%;
+    padding: 1rem;
+  }
 }

@@ -1,5 +1,6 @@
 .new-post {
   display: flex;
+ background-color: white;
 }
 
 .main-post-grp {

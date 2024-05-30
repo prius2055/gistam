@@ -20,14 +20,13 @@ const NewPost: React.FC = () => {
     (store) => store.users
   );
 
-
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const [loadingState, setLoadingState] = useState(false);
   const [showOtherIcons, setShowOtherIcons] = useState(false);
   const [formData, setFormData] = useState<NewPostObj>({
-    user_id: currentUser.id,
+    user_id: currentUser.id.toString(),
     topic: '',
     content: '',
     // author_name: authorName,
@@ -39,7 +38,6 @@ const NewPost: React.FC = () => {
 
   const hiddenFileImageInput = useRef<HTMLInputElement | null>(null);
   const hiddenFileVideoInput = useRef<HTMLInputElement | null>(null);
-
 
   const attachImageHandler = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
@@ -131,13 +129,9 @@ const NewPost: React.FC = () => {
     data.append('post[content]', formData.content);
     data.append('post[post_image]', formData.post_image[0]);
 
-    console.log(formData);
-
     const authToken = localStorage.getItem('token');
 
-    console.log(data);
-
-    fetch(`http://localhost:3001/api/v1/posts`, {
+    fetch(`http://localhost:3001/api/v1/users/${formData.user_id}/posts`, {
       method: 'POST',
       headers: {
         authorization: `${authToken}`,
@@ -145,12 +139,13 @@ const NewPost: React.FC = () => {
       body: data,
     })
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status) {
           setLoadingState(false);
           navigate('/posts');
         }
       })
       .catch((error) => {
+        setLoadingState(false);
         console.log(`something went wrong ${error}`);
       });
 

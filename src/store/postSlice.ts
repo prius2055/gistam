@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { PostObj } from '../data/postData';
+import { PostDeleteData, PostObj } from '../data/postData';
 
 export const getAllContent = createAsyncThunk('get/all-content', async () => {
   const response = await axios.get(
@@ -25,6 +25,25 @@ export const getContent = createAsyncThunk(
       {
         headers: {
           'content-type': 'application/json',
+        },
+      }
+    );
+    const post = await response.data;
+    return post;
+  }
+);
+
+export const deleteContent = createAsyncThunk(
+  'delete/content',
+  async (details: PostDeleteData) => {
+    const authToken = localStorage.getItem('token');
+    const response = await axios.delete(
+      `http://localhost:3001/api/v1/users/${details.userId}/posts/${details.postId}`,
+
+      {
+        headers: {
+          'content-type': 'application/json',
+          Authorization: authToken,
         },
       }
     );
