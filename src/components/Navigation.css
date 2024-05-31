@@ -121,3 +121,29 @@ a {
     justify-content: center;
   }
 }
+
+@media screen and (max-width: 360px) {
+  .logo {
+    font-size: 1.5rem;
+  }
+
+  .navbar {
+    padding-top: 2rem;
+  }
+
+  .trending h3 {
+    font-size: 1rem;
+  }
+
+  .navbar h3 {
+    font-size: 1rem;
+  }
+
+  .navbar li {
+    font-size: 0.8rem;
+  }
+  .navigation button {
+    margin-left: 0.3rem;
+    padding: 0.3rem 1rem;
+  }
+}
