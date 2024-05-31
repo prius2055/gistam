@@ -18,7 +18,7 @@
     "@types/react-redux": "^7.1.33",
     "axios": "^1.6.7",
     "big.js": "^6.2.1",
-    "eslint":"^7.5.0",
+    "eslint": "^7.5.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -27,7 +27,7 @@
     "react-router-dom": "^6.11.0",
     "react-scripts": "5.0.1",
     "transcript": "^0.0.6",
-    "typescript": "^5.3.3",
+    "typescript": ">= 2.7",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",
-   "@babel/eslint-parser": "^7.23.10",
+    "@babel/eslint-parser": "^7.23.10",
     "@babel/plugin-proposal-private-property-in-object": "",
     "@babel/plugin-syntax-jsx": "^7.21.4",
     "@babel/preset-react": "^7.18.6",
