@@ -19,29 +19,7 @@ const Navigation: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch()
-
-  // const logout = async () => {
-  //   setLoading(true);
-  //   const authToken = localStorage.getItem('token');
-
-  //   try {
-  //     const response = await axios.delete('http://localhost:3001/logout', {
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         Authorization: authToken,
-  //       },
-  //     });
-  //     const user = await response.data;
-  //     const { status } = user;
-
-  //     console.log(status);
-
-  //     if (status === 200) {
-  //       setLoading(false);
-  //       navigate('/', { state: status.data });
-  //     }
-  //   } catch (error) {}
-  // };
+ 
 
   const handleLogout = async (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
@@ -49,12 +27,15 @@ const Navigation: React.FC = () => {
     const authToken = localStorage.getItem('token');
 
     try {
-      const response = await axios.delete('http://localhost:3001/logout', {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: authToken,
-        },
-      });
+      const response = await axios.delete(
+        'https://chatterapp-backend.onrender.com/logout',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: authToken,
+          },
+        }
+      );
       const user = await response.data;
       const { status } = user;
 

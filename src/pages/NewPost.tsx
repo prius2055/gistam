@@ -131,13 +131,16 @@ const NewPost: React.FC = () => {
 
     const authToken = localStorage.getItem('token');
 
-    fetch(`http://localhost:3001/api/v1/users/${formData.user_id}/posts`, {
-      method: 'POST',
-      headers: {
-        authorization: `${authToken}`,
-      },
-      body: data,
-    })
+    fetch(
+      `https://chatterapp-backend.onrender.com/api/v1/users/${formData.user_id}/posts`,
+      {
+        method: 'POST',
+        headers: {
+          authorization: `${authToken}`,
+        },
+        body: data,
+      }
+    )
       .then((response) => {
         if (response.status) {
           setLoadingState(false);

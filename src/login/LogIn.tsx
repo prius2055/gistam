@@ -35,7 +35,7 @@ const LogIn: React.FC = () => {
       setUiState({ ...uiState, showLoadingUi: true });
       const userObj = { user: userLogin };
       const response = await axios.post(
-        'http://localhost:3001/login',
+        'https://chatterapp-backend.onrender.com/login',
         userObj,
         {
           headers: {

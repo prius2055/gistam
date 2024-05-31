@@ -4,7 +4,7 @@ import { PostDeleteData, PostObj } from '../data/postData';
 
 export const getAllContent = createAsyncThunk('get/all-content', async () => {
   const response = await axios.get(
-    `http://localhost:3001/api/v1/posts`,
+    `https://chatterapp-backend.onrender.com/api/v1/posts`,
 
     {
       headers: {
@@ -20,7 +20,7 @@ export const getContent = createAsyncThunk(
   'get/content',
   async (postId: number) => {
     const response = await axios.get(
-      `http://localhost:3001/api/v1/posts/${postId}`,
+      `https://chatterapp-backend.onrender.com/api/v1/posts/${postId}`,
 
       {
         headers: {
@@ -38,7 +38,7 @@ export const deleteContent = createAsyncThunk(
   async (details: PostDeleteData) => {
     const authToken = localStorage.getItem('token');
     const response = await axios.delete(
-      `http://localhost:3001/api/v1/users/${details.userId}/posts/${details.postId}`,
+      `https://chatterapp-backend.onrender.com/api/v1/users/${details.userId}/posts/${details.postId}`,
 
       {
         headers: {

@@ -40,7 +40,7 @@ const SignUp: React.FC = () => {
       setUiState({ ...uiState, showLoadingUi: true });
       const userObject = { user: userInfo };
       const response = await axios.post(
-        'http://localhost:3001/signup',
+        'https://chatterapp-backend.onrender.com/signup',
         userObject,
         {
           headers: {

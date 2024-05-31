@@ -8,7 +8,7 @@ export const postLike = createAsyncThunk(
   'post/like',
   async (likeObj: NewLikeObj) => {
     const response = await axios.post(
-      `http://localhost:3001/api/v1/users/${likeObj.user_id}/posts/${likeObj.post_id}/likes`,
+      `https://chatterapp-backend.onrender.com/api/v1/users/${likeObj.user_id}/posts/${likeObj.post_id}/likes`,
       { like: likeObj },
 
       {
@@ -19,8 +19,8 @@ export const postLike = createAsyncThunk(
       }
     );
     const like = await response.data;
-    // return like;
-    console.log(like)
+    return like;
+  
   }
 );
 
@@ -28,7 +28,7 @@ export const deleteLike = createAsyncThunk(
   'delete/like',
   async (details: NewLikeObj) => {
     const response = await axios.delete(
-      `http://localhost:3001/api/v1/users/${details.user_id}/posts/${details.post_id}/like`,
+      `https://chatterapp-backend.onrender.com/api/v1/users/${details.user_id}/posts/${details.post_id}/like`,
       {
         headers: {
           'Content-Type': 'application/json',
