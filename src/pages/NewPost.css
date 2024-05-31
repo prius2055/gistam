@@ -1,6 +1,6 @@
 .new-post {
   display: flex;
- background-color: white;
+  background-color: white;
 }
 
 .main-post-grp {
@@ -95,4 +95,29 @@ a {
 .icon-image,
 .icon-video {
   margin-left: 1rem;
+}
+
+@media screen and (max-width: 360px) {
+  .main-post-grp {
+    width: 70%;
+  }
+  .form {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    margin: 0.5rem;
+  }
+
+  .form-inputs input {
+    font-size: 0.8rem;
+  }
+
+  .text-area {
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .form button {
+    font-size: 0.6rem;
+    padding: 0.5rem 0.8rem;
+  }
 }
