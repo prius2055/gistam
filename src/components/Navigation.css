@@ -92,3 +92,32 @@ a {
     padding: 1rem;
   }
 }
+
+@media screen and (max-width: 480px) {
+  .post-header {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
+  .feed-header-action {
+    padding: 2% 1%;
+    margin-left: 0.5rem;
+    border-radius: 8px;
+  }
+
+  .navigation-group {
+    padding: 0.5rem;
+  }
+
+  .navbar h3 {
+    text-align: center;
+  }
+
+  .navbar ul {
+    padding-left: 0.4rem;
+  }
+
+  .trending {
+    justify-content: center;
+  }
+}

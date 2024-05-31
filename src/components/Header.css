@@ -64,3 +64,37 @@
     margin-left: 2rem;
   }
 }
+
+@media screen and (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    width: 100%;
+  }
+  .search {
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-bottom: 5%;
+    width: 95%;
+  }
+
+  .profile {
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-bottom: 5%;
+    width: 95%;
+  }
+  .profile span {
+    width: 100%;
+  }
+
+  .header-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .header-buttons a {
+    padding: 0.6rem 1rem;
+    margin-left: 0;
+  }
+}
