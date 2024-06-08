@@ -1,30 +1,16 @@
-/* .navigation-container {
-  width: 15%;
-  border-right: 1px #ccc solid;
-  height: 100vh;
-} */
-
-.navigation-group {
-  display: flex;
-  flex-direction: column;
-  padding: 1.5rem;
-  align-items: center;
-  height: 100vh;
-  width: 20%;
-  border-right: 1px #ccc solid;
-  position: sticky;
-  top: 0;
-}
-
-.logo {
-  font-size: 2rem;
-  color: #543ee0;
+.mobile-navigation {
+  display: none;
 }
 
 .navigation {
   display: flex;
   flex-direction: column;
+  padding: 1.5rem;
   align-items: center;
+  height: 100vh;
+  border-right: 1px #ccc solid;
+  position: sticky;
+  top: 0;
 }
 
 .navigation button {
@@ -87,63 +73,50 @@ a {
 }
 
 @media screen and (max-width: 640px) {
-  .navigation-group {
+  /* .navigation-group {
     width: 30%;
     padding: 1rem;
-  }
+  } */
 }
 
 @media screen and (max-width: 480px) {
-  .post-header {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+  .mobile-navigation {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    padding: 1rem;
+    z-index: 100;
+    width: 60%;
+    background-color: white;
   }
 
-  .feed-header-action {
-    padding: 2% 1%;
-    margin-left: 0.5rem;
-    border-radius: 8px;
+  .navigation {
+    display: none;
   }
 
-  .navigation-group {
-    padding: 0.5rem;
+  .navbar {
+    margin-top: 2rem;
+    padding-top: 2rem;
   }
 
-  .navbar h3 {
-    text-align: center;
+  .navigation button {
+    margin-left: 0.3rem;
+    padding: 0.3rem 1rem;
   }
 
-  .navbar ul {
-    padding-left: 0.4rem;
-  }
-
-  .trending {
-    justify-content: center;
+  .navigation-cancel-btn {
+    position: absolute;
+    top: 2%;
+    left: 2%;
+    width: 2rem;
+    height: 2rem;
   }
 }
 
 @media screen and (max-width: 360px) {
-  .logo {
-    font-size: 1.5rem;
-  }
-
-  .navbar {
-    padding-top: 2rem;
-  }
-
-  .trending h3 {
-    font-size: 1rem;
-  }
-
-  .navbar h3 {
-    font-size: 1rem;
-  }
-
-  .navbar li {
-    font-size: 0.8rem;
-  }
-  .navigation button {
-    margin-left: 0.3rem;
-    padding: 0.3rem 1rem;
+  .navigation-container {
+    width: 60%;
   }
 }

@@ -10,6 +10,8 @@
   margin-top: 1rem;
 }
 
+
+
 .post-header {
   display: flex;
   justify-content: space-between;
@@ -32,6 +34,11 @@
 .feed-header-action span {
   margin-left: 5px;
 }
+
+/* .post-navigation {
+  width: 20%;
+  border-right: 1px #ccc solid;
+} */
 
 .post-nav {
   border: 1px solid #ccc;
@@ -102,6 +109,15 @@
 }
 
 @media screen and (max-width: 480px) {
+  .post-list-container {
+    position: relative;
+  }
+
+
+
+  .post-list {
+    width: 100%;
+  }
   .post-header {
     margin-left: 0.5rem;
     margin-right: 0.5rem;

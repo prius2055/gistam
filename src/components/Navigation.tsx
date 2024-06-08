@@ -14,12 +14,13 @@ import chartImage from '../img/chart.png';
 import './Navigation.css';
 import axios from 'axios';
 import { clearCurrentUser } from '../store/userSlice';
+import { RxCross2 } from 'react-icons/rx';
+import { hideNavigation } from '../store/postSlice';
 
 const Navigation: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useAppDispatch()
- 
+  const dispatch = useAppDispatch();
 
   const handleLogout = async (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
@@ -43,14 +44,17 @@ const Navigation: React.FC = () => {
 
       if (status === 200) {
         setLoading(false);
-        dispatch(clearCurrentUser())
+        dispatch(clearCurrentUser());
         localStorage.removeItem('token');
         navigate('/');
       }
     } catch (error) {
-       setLoading(false);
+      setLoading(false);
     }
+  };
 
+  const handleCloseNavigation = () => {
+    dispatch(hideNavigation());
   };
 
   if (loading) {
@@ -58,73 +62,67 @@ const Navigation: React.FC = () => {
   }
 
   return (
-    <div className="navigation-group">
-      <NavLink to="/posts" className="logo">
-        GISTAM
-      </NavLink>
-
-      <nav className="navigation">
-        <div className="navbar">
-          <div>
-            <h3>Overview</h3>
-            <ul>
-              <NavLink to="/posts" className="list-group">
-                <img src={feedImage} alt="feed" />
-                <p>Posts</p>
-              </NavLink>
-              <li className="list-group">
-                <FontAwesomeIcon icon={faBookmark} />
-                <p>Bookmarks</p>
-              </li>
-              <li className="list-group">
-                <FontAwesomeIcon icon={faUserGroup} />
-                <p> Team blogs</p>
-              </li>
-              <li className="list-group">
-                <FontAwesomeIcon icon={faEnvelopeOpen} />
-                <p>Drafts</p>
-              </li>
-              <li className="list-group">
-                <img src={chartImage} alt="chart" />
-                <p>Analysis</p>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <NavLink to="/member" className="trending">
-              <h3>Trending</h3>
-              <FontAwesomeIcon icon={faArrowTrendUp} />
+    <nav className="navigation">
+      <div className="navbar">
+        <div>
+          <h3>Overview</h3>
+          <ul>
+            <NavLink to="/posts" className="list-group">
+              <img src={feedImage} alt="feed" />
+              <p>Posts</p>
             </NavLink>
-
-            <ul className="trending-list">
-              <li>Programming</li>
-              <li>Data science</li>
-              <li>Technology</li>
-              <li>Machine learning</li>
-              <li>Politics</li>
-              <li>See all</li>
-            </ul>
-          </div>
-          <div>
-            <h3> Personal</h3>
-            <ul>
-              <li className="list-group">
-                <FontAwesomeIcon icon={faUser} />
-                <p> Account</p>
-              </li>
-              <li className="list-group">
-                <FontAwesomeIcon icon={faBell} />
-                <p> Notifications</p>
-              </li>
-              <form onSubmit={handleLogout}>
-                <button type="submit">Log Out</button>
-              </form>
-            </ul>
-          </div>
+            <li className="list-group">
+              <FontAwesomeIcon icon={faBookmark} />
+              <p>Bookmarks</p>
+            </li>
+            <li className="list-group">
+              <FontAwesomeIcon icon={faUserGroup} />
+              <p> Team blogs</p>
+            </li>
+            <li className="list-group">
+              <FontAwesomeIcon icon={faEnvelopeOpen} />
+              <p>Drafts</p>
+            </li>
+            <li className="list-group">
+              <img src={chartImage} alt="chart" />
+              <p>Analysis</p>
+            </li>
+          </ul>
         </div>
-      </nav>
-    </div>
+
+        <div>
+          <NavLink to="/member" className="trending">
+            <h3>Trending</h3>
+            <FontAwesomeIcon icon={faArrowTrendUp} />
+          </NavLink>
+
+          <ul className="trending-list">
+            <li>Programming</li>
+            <li>Data science</li>
+            <li>Technology</li>
+            <li>Machine learning</li>
+            <li>Politics</li>
+            <li>See all</li>
+          </ul>
+        </div>
+        <div>
+          <h3> Personal</h3>
+          <ul>
+            <li className="list-group">
+              <FontAwesomeIcon icon={faUser} />
+              <p> Account</p>
+            </li>
+            <li className="list-group">
+              <FontAwesomeIcon icon={faBell} />
+              <p> Notifications</p>
+            </li>
+            <form onSubmit={handleLogout}>
+              <button type="submit">Log Out</button>
+            </form>
+          </ul>
+        </div>
+      </div>
+    </nav>
   );
 };
 

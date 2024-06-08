@@ -1,10 +1,36 @@
+.mobile-header {
+  display: none;
+}
+
 .header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px #ccc solid;
+}
+
+.header-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 0.5rem;
-  padding-bottom: 0.8rem;
-  border-bottom: 1px #ccc solid;
+  width: 100%;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+a {
+  margin-top: 0;
+}
+
+.header-bottom {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  padding-right: 2%;
+  margin-top: 3%;
+  margin-bottom: 1%;
 }
 
 .search {
@@ -13,7 +39,6 @@
   border: 1px #ccc solid;
   border-radius: 0.5rem;
   padding: 0 0.5rem;
-  margin-left: 30rem;
   width: 35%;
 }
 
@@ -49,27 +74,74 @@
 
 .header-buttons a {
   margin-left: 1rem;
-  padding: 0.6rem 2rem;
+  padding: 0.4rem 1.5rem;
   border-radius: 0.3rem;
   cursor: pointer;
   border: 1px solid #543ee0;
 }
 
 @media screen and (max-width: 960px) {
-  .header {
-    padding-top: 0.8rem;
+  .search {
+    padding: 0 0.2rem;
   }
 
+  .search input {
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    width: 100%;
+  }
+
+  .header-buttons a {
+    padding: 0.2rem 1rem;
+  }
+
+  .profile-image,
+  .header-icons {
+    height: 1.2rem;
+    width: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 640px) {
   .search {
-    margin-left: 2rem;
+    padding: 0 0.2rem;
+  }
+
+  .search input {
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    width: 100%;
+  }
+
+  .header-buttons a {
+    padding: 0.2rem 1rem;
+  }
+
+  .profile-image,
+  .header-icons {
+    height: 1.2rem;
+    width: 1.2rem;
   }
 }
 
 @media screen and (max-width: 480px) {
-  .header {
+  .mobile-header {
+    display: flex;
     flex-direction: column;
-    width: 100%;
+    align-items: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px #ccc solid;
   }
+
+  .header {
+    display: none;
+  }
+
   .search {
     margin-left: 2.5%;
     margin-right: 2.5%;
@@ -78,23 +150,29 @@
   }
 
   .profile {
-    margin-left: 2.5%;
-    margin-right: 2.5%;
-    margin-bottom: 5%;
-    width: 95%;
-  }
-  .profile span {
-    width: 100%;
+    margin-right: 2%;
   }
 
   .header-buttons {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+    /* margin-left: 1%; */
+    /* width: 100%; */
   }
 
   .header-buttons a {
-    padding: 0.6rem 1rem;
-    margin-left: 0;
+    padding: 0.1rem 0.2rem;
+    margin-left: 0.5rem;
+  }
+
+  a {
+    margin-top: 0;
+  }
+
+  #hamburger-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .search {
+    display: none;
   }
 }

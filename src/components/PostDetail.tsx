@@ -18,13 +18,15 @@ import Header from './Header';
 import Navigation from './Navigation';
 import { LikeType, NewLikeObj } from '../data/likeData';
 import { postLike, deleteLike } from '../store/likeSlice';
+import MobileNavigation from './MobileNavigation';
+import MobileHeader from './MobileHeader';
 
 const PostDetail: React.FC = () => {
   const { currentUser } = useAppSelector((store) => store.users);
 
-  const user = currentUser
+  const user = currentUser;
 
-  const { post, isLoading, loadingError } = useAppSelector(
+  const { post, isLoading, loadingError, navigationDisplay } = useAppSelector(
     (store) => store.posts
   );
 
@@ -134,8 +136,13 @@ const PostDetail: React.FC = () => {
     <div className="post-detail-container">
       {currentUser && <Navigation />}
 
+      <div style={{ display: navigationDisplay ? 'flex' : 'none' }}>
+        <MobileNavigation />
+      </div>
+
       <div className="post-detail">
         <Header />
+        <MobileHeader />
         <div className="post-detail-content">
           <div className="content-details">
             <CgProfile className="author-picture" />

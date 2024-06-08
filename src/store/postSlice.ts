@@ -52,24 +52,33 @@ export const deleteContent = createAsyncThunk(
   }
 );
 
-interface PostsState {
-  postsArray: PostObj[];
-  post: PostObj | null;
-  isLoading: boolean;
-  loadingError: boolean;
-}
+// interface PostsState {
+//   postsArray: PostObj[];
+//   post: PostObj | null;
+//   isLoading: boolean;
+//   loadingError: boolean;
+//   showNavigation: boolean;
+// }
 
 const initialState = {
   postsArray: [],
   post: null,
   isLoading: false,
   loadingError: false,
+  navigationDisplay: true,
 };
 
 const postSlice = createSlice({
   name: 'post',
   initialState,
-  reducers: {},
+  reducers: {
+    showNavigation: (state) => {
+      state.navigationDisplay = true;
+    },
+    hideNavigation: (state) => {
+      state.navigationDisplay = false;
+    },
+  },
 
   extraReducers: (builder) => {
     builder
@@ -101,5 +110,7 @@ const postSlice = createSlice({
       });
   },
 });
+
+export const { showNavigation, hideNavigation } = postSlice.actions;
 
 export default postSlice.reducer;

@@ -6,43 +6,56 @@ import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { CgProfile } from 'react-icons/cg';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import './Header.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 import { getCurrentUser } from '../store/userSlice';
 import { showNavigation } from '../store/postSlice';
 
-const Header: React.FC = () => {
+const MobileHeader: React.FC = () => {
   const { navigationDisplay } = useAppSelector((store) => store.posts);
   const { currentUser, isLoading, loadingError } = useAppSelector(
     (store) => store.users
   );
 
-  const [showNavObj, setShowNavObj] = useState({
-    navigation: false,
-    closeBtn: false,
-  });
+  const [showNavObj, setShowNavObj] = useState(false);
 
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   // const hamburger = document.getElementById('hamburger-icon');
   // console.log(hamburger?.style);
 
+  const hamburger = document.getElementById('hamburger-icon');
   useEffect(() => {
     dispatch(getCurrentUser());
-  }, [dispatch]);
 
+    // if (hamburger && currentUser.firstname) {
+    //   dispatch(showNavigation());
+    //   hamburger.style.display = 'none';
+    // }
+  }, [dispatch, showNavObj]);
 
+  const onShowNavigation = () => {
+    setShowNavObj(true);
+    if (hamburger && currentUser.firstname) {
+      dispatch(showNavigation());
+      // hamburger.style.display = 'none';
+    } else {
+      navigate('/login');
+    }
+  };
 
   return (
-    <div className="header">
+    <div className="mobile-header">
       <div className="header-top">
+        <RxHamburgerMenu
+          id="hamburger-icon"
+          onClick={onShowNavigation}
+          // style={{ display: navigationDisplay ? 'none' : 'block' }}
+        />
+
         <NavLink to="/posts" className="logo">
           GISTAM
         </NavLink>
-
-        <div className="search">
-          <FontAwesomeIcon icon={faMagnifyingGlass} className="header-icons" />
-          <input type="text" placeholder="Search here" />
-        </div>
 
         <div className="profile">
           {currentUser?.firstname ? `Hi ${currentUser.firstname}` : `Welcome`}
@@ -93,4 +106,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default MobileHeader;

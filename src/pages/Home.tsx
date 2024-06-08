@@ -11,14 +11,13 @@ import './Home.css';
 import { PostObj } from '../data/postData';
 import { getAllContent } from '../store/postSlice';
 import { NavLink, useNavigate } from 'react-router-dom';
+import MobileHeader from '../components/MobileHeader';
 
 const Home: React.FC = () => {
   const { currentUser } = useAppSelector((store) => store.users);
   const { postsArray, isLoading, loadingError } = useAppSelector(
     (store) => store.posts
   );
-
-  
 
   const reversedPostsArray: PostObj[] = [...postsArray].reverse();
 
@@ -43,7 +42,12 @@ const Home: React.FC = () => {
 
   return (
     <div className="home">
-      <Header />
+      <div className="post-list-header">
+        <Header />
+      </div>
+
+      <MobileHeader />
+
       <div className="post-header">
         <div>
           <h2>POSTS</h2>

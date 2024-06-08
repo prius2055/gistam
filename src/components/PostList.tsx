@@ -8,6 +8,7 @@ import { PostObj } from '../data/postData';
 import { FaRegComments } from 'react-icons/fa';
 import { FaRegHeart } from 'react-icons/fa';
 import { AiOutlineDelete } from 'react-icons/ai';
+
 import Post from './Post';
 import { NewLikeObj } from '../data/likeData';
 import { postLike, deleteLike } from '../store/likeSlice';
@@ -16,12 +17,13 @@ import Navigation from './Navigation';
 import Header from './Header';
 
 import './PostList.css';
+import MobileNavigation from './MobileNavigation';
+import MobileHeader from './MobileHeader';
 const PostList: React.FC = () => {
   const { currentUser } = useAppSelector((store) => store.users);
 
-  const { postsArray, isLoading, loadingError } = useAppSelector(
-    (store) => store.posts
-  );
+  const { postsArray, isLoading, loadingError, navigationDisplay } =
+    useAppSelector((store) => store.posts);
 
   const [likeObj, setLikeObj] = useState<NewLikeObj>({
     user_id: 1,
@@ -68,8 +70,15 @@ const PostList: React.FC = () => {
   return (
     <div className="post-list-container">
       <Navigation />
+
+      <div style={{ display: navigationDisplay ? 'flex' : 'none' }}>
+        <MobileNavigation />
+      </div>
+
       <div className="post-list">
         <Header />
+        <MobileHeader />
+
         <div className="post-header">
           <div>
             <h2>POSTS</h2>
@@ -80,7 +89,7 @@ const PostList: React.FC = () => {
             className="feed-header-action"
           >
             <FaPencil />
-            <span>Post a content</span>
+            <span>Post</span>
           </NavLink>
         </div>
 
