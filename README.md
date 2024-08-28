@@ -59,20 +59,12 @@ It is bootstrapped with [Create React App](https://github.com/facebook/create-re
     <li><a href="https://create-react-app.dev/">React</a></li>
   </ul>
 </details>
- 
-### Key Features <a name="key-features"></a>
-
-- **[A Home page for the website]**
-- **[A UI interface for a calculator application]**
-- **[A functional calculator application]**
-- **[Get quotes from an API with fetch and display the quote]**
-- **[Linters, to eliminate errors and better optimization]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- Click [here](https://math-magician-ijj5.onrender.com/) to see a live demo of the apllication
+- Click [here](https://gistam.netlify.app/) to see a live demo of the application
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
